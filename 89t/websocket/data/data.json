@@ -1,0 +1,14 @@
+{
+  "identifier": 1,
+  "operation": "admin",
+  "msgId": "100",
+  "data": {
+    "event": "recruit.query.pool",
+    "topic": "wlf-battle",
+    "data": {
+      "id": 100
+    }
+  }
+}
+
+
