@@ -1,0 +1,14 @@
+{
+  "relations": [
+    {
+      "event": "recruit.query.pool",
+      "data": "RecruitQueryPoolReq"
+    },
+    {
+      "event": "recruit.edit.pool",
+      "data": "RecruitQueryPoolResp"
+    }
+  ]
+}
+
+

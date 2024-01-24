@@ -69,6 +69,52 @@ func (TopicType) EnumDescriptor() ([]byte, []int) {
 	return file_wfl_proto_rawDescGZIP(), []int{0}
 }
 
+type MsgContentType int32
+
+const (
+	MsgContentType_FIRST MsgContentType = 0
+	MsgContentType_THIRD MsgContentType = 1
+)
+
+// Enum value maps for MsgContentType.
+var (
+	MsgContentType_name = map[int32]string{
+		0: "FIRST",
+		1: "THIRD",
+	}
+	MsgContentType_value = map[string]int32{
+		"FIRST": 0,
+		"THIRD": 1,
+	}
+)
+
+func (x MsgContentType) Enum() *MsgContentType {
+	p := new(MsgContentType)
+	*p = x
+	return p
+}
+
+func (x MsgContentType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MsgContentType) Descriptor() protoreflect.EnumDescriptor {
+	return file_wfl_proto_enumTypes[1].Descriptor()
+}
+
+func (MsgContentType) Type() protoreflect.EnumType {
+	return &file_wfl_proto_enumTypes[1]
+}
+
+func (x MsgContentType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MsgContentType.Descriptor instead.
+func (MsgContentType) EnumDescriptor() ([]byte, []int) {
+	return file_wfl_proto_rawDescGZIP(), []int{1}
+}
+
 type Req struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -193,9 +239,8 @@ type SendMsgReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Event string    `protobuf:"bytes,1,opt,name=event,proto3" json:"event,omitempty"`
-	Data  []byte    `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	Topic TopicType `protobuf:"varint,3,opt,name=topic,proto3,enum=TopicType" json:"topic,omitempty"`
+	Desc string       `protobuf:"bytes,1,opt,name=desc,proto3" json:"desc,omitempty"`
+	Info *SendMsgReq2 `protobuf:"bytes,2,opt,name=info,proto3" json:"info,omitempty"`
 }
 
 func (x *SendMsgReq) Reset() {
@@ -230,21 +275,77 @@ func (*SendMsgReq) Descriptor() ([]byte, []int) {
 	return file_wfl_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *SendMsgReq) GetEvent() string {
+func (x *SendMsgReq) GetDesc() string {
+	if x != nil {
+		return x.Desc
+	}
+	return ""
+}
+
+func (x *SendMsgReq) GetInfo() *SendMsgReq2 {
+	if x != nil {
+		return x.Info
+	}
+	return nil
+}
+
+type SendMsgReq2 struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Event string    `protobuf:"bytes,1,opt,name=event,proto3" json:"event,omitempty"`
+	Data  []byte    `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	Topic TopicType `protobuf:"varint,3,opt,name=topic,proto3,enum=TopicType" json:"topic,omitempty"`
+}
+
+func (x *SendMsgReq2) Reset() {
+	*x = SendMsgReq2{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_wfl_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SendMsgReq2) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendMsgReq2) ProtoMessage() {}
+
+func (x *SendMsgReq2) ProtoReflect() protoreflect.Message {
+	mi := &file_wfl_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendMsgReq2.ProtoReflect.Descriptor instead.
+func (*SendMsgReq2) Descriptor() ([]byte, []int) {
+	return file_wfl_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SendMsgReq2) GetEvent() string {
 	if x != nil {
 		return x.Event
 	}
 	return ""
 }
 
-func (x *SendMsgReq) GetData() []byte {
+func (x *SendMsgReq2) GetData() []byte {
 	if x != nil {
 		return x.Data
 	}
 	return nil
 }
 
-func (x *SendMsgReq) GetTopic() TopicType {
+func (x *SendMsgReq2) GetTopic() TopicType {
 	if x != nil {
 		return x.Topic
 	}
@@ -263,7 +364,7 @@ type RecruitQueryPoolReq struct {
 func (x *RecruitQueryPoolReq) Reset() {
 	*x = RecruitQueryPoolReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_wfl_proto_msgTypes[2]
+		mi := &file_wfl_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -276,7 +377,7 @@ func (x *RecruitQueryPoolReq) String() string {
 func (*RecruitQueryPoolReq) ProtoMessage() {}
 
 func (x *RecruitQueryPoolReq) ProtoReflect() protoreflect.Message {
-	mi := &file_wfl_proto_msgTypes[2]
+	mi := &file_wfl_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -289,7 +390,7 @@ func (x *RecruitQueryPoolReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecruitQueryPoolReq.ProtoReflect.Descriptor instead.
 func (*RecruitQueryPoolReq) Descriptor() ([]byte, []int) {
-	return file_wfl_proto_rawDescGZIP(), []int{2}
+	return file_wfl_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *RecruitQueryPoolReq) GetId() int32 {
@@ -297,6 +398,298 @@ func (x *RecruitQueryPoolReq) GetId() int32 {
 		return x.Id
 	}
 	return 0
+}
+
+type Resp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Identifier int32  `protobuf:"varint,1,opt,name=identifier,proto3" json:"identifier,omitempty"`
+	Operation  string `protobuf:"bytes,2,opt,name=operation,proto3" json:"operation,omitempty"`
+	MsgId      string `protobuf:"bytes,3,opt,name=msgId,proto3" json:"msgId,omitempty"`
+	// Types that are assignable to Data:
+	//
+	//	*Resp_PushData
+	//	*Resp_PullMsgBySeqListResp
+	//	*Resp_MaxAndMinSeqResp
+	//	*Resp_PullSeqFinishResp
+	Data isResp_Data `protobuf_oneof:"data"`
+}
+
+func (x *Resp) Reset() {
+	*x = Resp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_wfl_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Resp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Resp) ProtoMessage() {}
+
+func (x *Resp) ProtoReflect() protoreflect.Message {
+	mi := &file_wfl_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Resp.ProtoReflect.Descriptor instead.
+func (*Resp) Descriptor() ([]byte, []int) {
+	return file_wfl_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *Resp) GetIdentifier() int32 {
+	if x != nil {
+		return x.Identifier
+	}
+	return 0
+}
+
+func (x *Resp) GetOperation() string {
+	if x != nil {
+		return x.Operation
+	}
+	return ""
+}
+
+func (x *Resp) GetMsgId() string {
+	if x != nil {
+		return x.MsgId
+	}
+	return ""
+}
+
+func (m *Resp) GetData() isResp_Data {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+func (x *Resp) GetPushData() *GeneralMsgData {
+	if x, ok := x.GetData().(*Resp_PushData); ok {
+		return x.PushData
+	}
+	return nil
+}
+
+func (x *Resp) GetPullMsgBySeqListResp() *PullMsgBySeqListResp {
+	if x, ok := x.GetData().(*Resp_PullMsgBySeqListResp); ok {
+		return x.PullMsgBySeqListResp
+	}
+	return nil
+}
+
+func (x *Resp) GetMaxAndMinSeqResp() *GetMsgMaxAndMinSeqResp {
+	if x, ok := x.GetData().(*Resp_MaxAndMinSeqResp); ok {
+		return x.MaxAndMinSeqResp
+	}
+	return nil
+}
+
+func (x *Resp) GetPullSeqFinishResp() *PullSeqFinishResp {
+	if x, ok := x.GetData().(*Resp_PullSeqFinishResp); ok {
+		return x.PullSeqFinishResp
+	}
+	return nil
+}
+
+type isResp_Data interface {
+	isResp_Data()
+}
+
+type Resp_PushData struct {
+	PushData *GeneralMsgData `protobuf:"bytes,6,opt,name=pushData,proto3,oneof"`
+}
+
+type Resp_PullMsgBySeqListResp struct {
+	PullMsgBySeqListResp *PullMsgBySeqListResp `protobuf:"bytes,7,opt,name=pullMsgBySeqListResp,proto3,oneof"`
+}
+
+type Resp_MaxAndMinSeqResp struct {
+	MaxAndMinSeqResp *GetMsgMaxAndMinSeqResp `protobuf:"bytes,8,opt,name=maxAndMinSeqResp,proto3,oneof"`
+}
+
+type Resp_PullSeqFinishResp struct {
+	PullSeqFinishResp *PullSeqFinishResp `protobuf:"bytes,9,opt,name=pullSeqFinishResp,proto3,oneof"`
+}
+
+func (*Resp_PushData) isResp_Data() {}
+
+func (*Resp_PullMsgBySeqListResp) isResp_Data() {}
+
+func (*Resp_MaxAndMinSeqResp) isResp_Data() {}
+
+func (*Resp_PullSeqFinishResp) isResp_Data() {}
+
+type GeneralMsgData struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Event       string         `protobuf:"bytes,1,opt,name=event,proto3" json:"event,omitempty"`
+	Topic       TopicType      `protobuf:"varint,2,opt,name=topic,proto3,enum=TopicType" json:"topic,omitempty"`
+	ContentType MsgContentType `protobuf:"varint,3,opt,name=contentType,proto3,enum=MsgContentType" json:"contentType,omitempty"`
+	SeqId       uint32         `protobuf:"varint,4,opt,name=seqId,proto3" json:"seqId,omitempty"`
+	Data        []byte         `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
+	ErrCode     int32          `protobuf:"varint,6,opt,name=errCode,proto3" json:"errCode,omitempty"`
+	ErrMsg      string         `protobuf:"bytes,7,opt,name=errMsg,proto3" json:"errMsg,omitempty"`
+}
+
+func (x *GeneralMsgData) Reset() {
+	*x = GeneralMsgData{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_wfl_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GeneralMsgData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GeneralMsgData) ProtoMessage() {}
+
+func (x *GeneralMsgData) ProtoReflect() protoreflect.Message {
+	mi := &file_wfl_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GeneralMsgData.ProtoReflect.Descriptor instead.
+func (*GeneralMsgData) Descriptor() ([]byte, []int) {
+	return file_wfl_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GeneralMsgData) GetEvent() string {
+	if x != nil {
+		return x.Event
+	}
+	return ""
+}
+
+func (x *GeneralMsgData) GetTopic() TopicType {
+	if x != nil {
+		return x.Topic
+	}
+	return TopicType_NONE
+}
+
+func (x *GeneralMsgData) GetContentType() MsgContentType {
+	if x != nil {
+		return x.ContentType
+	}
+	return MsgContentType_FIRST
+}
+
+func (x *GeneralMsgData) GetSeqId() uint32 {
+	if x != nil {
+		return x.SeqId
+	}
+	return 0
+}
+
+func (x *GeneralMsgData) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *GeneralMsgData) GetErrCode() int32 {
+	if x != nil {
+		return x.ErrCode
+	}
+	return 0
+}
+
+func (x *GeneralMsgData) GetErrMsg() string {
+	if x != nil {
+		return x.ErrMsg
+	}
+	return ""
+}
+
+// @push recruit.query.pool
+type RecruitQueryPoolResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id          int32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`                          // 招募卡池id
+	CardIds     []int32 `protobuf:"varint,2,rep,packed,name=cardIds,proto3" json:"cardIds,omitempty"`         // 卡牌id列表 格式1010130
+	LuckCardIds []int32 `protobuf:"varint,3,rep,packed,name=luckCardIds,proto3" json:"luckCardIds,omitempty"` // 卡牌id列表 格式1010130
+}
+
+func (x *RecruitQueryPoolResp) Reset() {
+	*x = RecruitQueryPoolResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_wfl_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RecruitQueryPoolResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RecruitQueryPoolResp) ProtoMessage() {}
+
+func (x *RecruitQueryPoolResp) ProtoReflect() protoreflect.Message {
+	mi := &file_wfl_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RecruitQueryPoolResp.ProtoReflect.Descriptor instead.
+func (*RecruitQueryPoolResp) Descriptor() ([]byte, []int) {
+	return file_wfl_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *RecruitQueryPoolResp) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *RecruitQueryPoolResp) GetCardIds() []int32 {
+	if x != nil {
+		return x.CardIds
+	}
+	return nil
+}
+
+func (x *RecruitQueryPoolResp) GetLuckCardIds() []int32 {
+	if x != nil {
+		return x.LuckCardIds
+	}
+	return nil
 }
 
 type PullMsgBySeqListReq struct {
@@ -308,7 +701,7 @@ type PullMsgBySeqListReq struct {
 func (x *PullMsgBySeqListReq) Reset() {
 	*x = PullMsgBySeqListReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_wfl_proto_msgTypes[3]
+		mi := &file_wfl_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -321,7 +714,7 @@ func (x *PullMsgBySeqListReq) String() string {
 func (*PullMsgBySeqListReq) ProtoMessage() {}
 
 func (x *PullMsgBySeqListReq) ProtoReflect() protoreflect.Message {
-	mi := &file_wfl_proto_msgTypes[3]
+	mi := &file_wfl_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -334,7 +727,7 @@ func (x *PullMsgBySeqListReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PullMsgBySeqListReq.ProtoReflect.Descriptor instead.
 func (*PullMsgBySeqListReq) Descriptor() ([]byte, []int) {
-	return file_wfl_proto_rawDescGZIP(), []int{3}
+	return file_wfl_proto_rawDescGZIP(), []int{7}
 }
 
 type GetMsgMaxAndMinSeqReq struct {
@@ -346,7 +739,7 @@ type GetMsgMaxAndMinSeqReq struct {
 func (x *GetMsgMaxAndMinSeqReq) Reset() {
 	*x = GetMsgMaxAndMinSeqReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_wfl_proto_msgTypes[4]
+		mi := &file_wfl_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -359,7 +752,7 @@ func (x *GetMsgMaxAndMinSeqReq) String() string {
 func (*GetMsgMaxAndMinSeqReq) ProtoMessage() {}
 
 func (x *GetMsgMaxAndMinSeqReq) ProtoReflect() protoreflect.Message {
-	mi := &file_wfl_proto_msgTypes[4]
+	mi := &file_wfl_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -372,7 +765,359 @@ func (x *GetMsgMaxAndMinSeqReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMsgMaxAndMinSeqReq.ProtoReflect.Descriptor instead.
 func (*GetMsgMaxAndMinSeqReq) Descriptor() ([]byte, []int) {
-	return file_wfl_proto_rawDescGZIP(), []int{4}
+	return file_wfl_proto_rawDescGZIP(), []int{8}
+}
+
+type PullMsgBySeqListResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Age  int32  `protobuf:"varint,2,opt,name=age,proto3" json:"age,omitempty"`
+	// Types that are assignable to Data:
+	//
+	//	*PullMsgBySeqListResp_Pea
+	//	*PullMsgBySeqListResp_Peb
+	//	*PullMsgBySeqListResp_Pec
+	Data isPullMsgBySeqListResp_Data `protobuf_oneof:"data"`
+}
+
+func (x *PullMsgBySeqListResp) Reset() {
+	*x = PullMsgBySeqListResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_wfl_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PullMsgBySeqListResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PullMsgBySeqListResp) ProtoMessage() {}
+
+func (x *PullMsgBySeqListResp) ProtoReflect() protoreflect.Message {
+	mi := &file_wfl_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PullMsgBySeqListResp.ProtoReflect.Descriptor instead.
+func (*PullMsgBySeqListResp) Descriptor() ([]byte, []int) {
+	return file_wfl_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *PullMsgBySeqListResp) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *PullMsgBySeqListResp) GetAge() int32 {
+	if x != nil {
+		return x.Age
+	}
+	return 0
+}
+
+func (m *PullMsgBySeqListResp) GetData() isPullMsgBySeqListResp_Data {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+func (x *PullMsgBySeqListResp) GetPea() *PersonA {
+	if x, ok := x.GetData().(*PullMsgBySeqListResp_Pea); ok {
+		return x.Pea
+	}
+	return nil
+}
+
+func (x *PullMsgBySeqListResp) GetPeb() *PersonB {
+	if x, ok := x.GetData().(*PullMsgBySeqListResp_Peb); ok {
+		return x.Peb
+	}
+	return nil
+}
+
+func (x *PullMsgBySeqListResp) GetPec() *PersonC {
+	if x, ok := x.GetData().(*PullMsgBySeqListResp_Pec); ok {
+		return x.Pec
+	}
+	return nil
+}
+
+type isPullMsgBySeqListResp_Data interface {
+	isPullMsgBySeqListResp_Data()
+}
+
+type PullMsgBySeqListResp_Pea struct {
+	Pea *PersonA `protobuf:"bytes,3,opt,name=pea,proto3,oneof"`
+}
+
+type PullMsgBySeqListResp_Peb struct {
+	Peb *PersonB `protobuf:"bytes,4,opt,name=peb,proto3,oneof"`
+}
+
+type PullMsgBySeqListResp_Pec struct {
+	Pec *PersonC `protobuf:"bytes,5,opt,name=pec,proto3,oneof"`
+}
+
+func (*PullMsgBySeqListResp_Pea) isPullMsgBySeqListResp_Data() {}
+
+func (*PullMsgBySeqListResp_Peb) isPullMsgBySeqListResp_Data() {}
+
+func (*PullMsgBySeqListResp_Pec) isPullMsgBySeqListResp_Data() {}
+
+type PersonA struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name    string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Address string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+}
+
+func (x *PersonA) Reset() {
+	*x = PersonA{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_wfl_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PersonA) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PersonA) ProtoMessage() {}
+
+func (x *PersonA) ProtoReflect() protoreflect.Message {
+	mi := &file_wfl_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PersonA.ProtoReflect.Descriptor instead.
+func (*PersonA) Descriptor() ([]byte, []int) {
+	return file_wfl_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *PersonA) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *PersonA) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+type PersonB struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name    string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Address string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+}
+
+func (x *PersonB) Reset() {
+	*x = PersonB{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_wfl_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PersonB) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PersonB) ProtoMessage() {}
+
+func (x *PersonB) ProtoReflect() protoreflect.Message {
+	mi := &file_wfl_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PersonB.ProtoReflect.Descriptor instead.
+func (*PersonB) Descriptor() ([]byte, []int) {
+	return file_wfl_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *PersonB) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *PersonB) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+type PersonC struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name    string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Address string `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+}
+
+func (x *PersonC) Reset() {
+	*x = PersonC{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_wfl_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PersonC) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PersonC) ProtoMessage() {}
+
+func (x *PersonC) ProtoReflect() protoreflect.Message {
+	mi := &file_wfl_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PersonC.ProtoReflect.Descriptor instead.
+func (*PersonC) Descriptor() ([]byte, []int) {
+	return file_wfl_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *PersonC) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *PersonC) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+type GetMsgMaxAndMinSeqResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *GetMsgMaxAndMinSeqResp) Reset() {
+	*x = GetMsgMaxAndMinSeqResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_wfl_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetMsgMaxAndMinSeqResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetMsgMaxAndMinSeqResp) ProtoMessage() {}
+
+func (x *GetMsgMaxAndMinSeqResp) ProtoReflect() protoreflect.Message {
+	mi := &file_wfl_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetMsgMaxAndMinSeqResp.ProtoReflect.Descriptor instead.
+func (*GetMsgMaxAndMinSeqResp) Descriptor() ([]byte, []int) {
+	return file_wfl_proto_rawDescGZIP(), []int{13}
+}
+
+type PullSeqFinishResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *PullSeqFinishResp) Reset() {
+	*x = PullSeqFinishResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_wfl_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PullSeqFinishResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PullSeqFinishResp) ProtoMessage() {}
+
+func (x *PullSeqFinishResp) ProtoReflect() protoreflect.Message {
+	mi := &file_wfl_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PullSeqFinishResp.ProtoReflect.Descriptor instead.
+func (*PullSeqFinishResp) Descriptor() ([]byte, []int) {
+	return file_wfl_proto_rawDescGZIP(), []int{14}
 }
 
 var File_wfl_proto protoreflect.FileDescriptor
@@ -396,22 +1141,95 @@ var file_wfl_proto_rawDesc = []byte{
 	0x52, 0x65, 0x71, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x47, 0x65, 0x74, 0x4d,
 	0x73, 0x67, 0x4d, 0x61, 0x78, 0x41, 0x6e, 0x64, 0x4d, 0x69, 0x6e, 0x53, 0x65, 0x71, 0x52, 0x65,
 	0x71, 0x48, 0x00, 0x52, 0x0f, 0x6d, 0x61, 0x78, 0x41, 0x6e, 0x64, 0x4d, 0x69, 0x6e, 0x53, 0x65,
-	0x71, 0x52, 0x65, 0x71, 0x42, 0x06, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x58, 0x0a, 0x0a,
-	0x53, 0x65, 0x6e, 0x64, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x76,
-	0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x76, 0x65, 0x6e, 0x74,
-	0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x04,
-	0x64, 0x61, 0x74, 0x61, 0x12, 0x20, 0x0a, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x0e, 0x32, 0x0a, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x54, 0x79, 0x70, 0x65, 0x52,
-	0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x22, 0x25, 0x0a, 0x13, 0x52, 0x65, 0x63, 0x72, 0x75, 0x69,
-	0x74, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x6f, 0x6f, 0x6c, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a,
-	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x22, 0x15, 0x0a,
-	0x13, 0x50, 0x75, 0x6c, 0x6c, 0x4d, 0x73, 0x67, 0x42, 0x79, 0x53, 0x65, 0x71, 0x4c, 0x69, 0x73,
-	0x74, 0x52, 0x65, 0x71, 0x22, 0x17, 0x0a, 0x15, 0x47, 0x65, 0x74, 0x4d, 0x73, 0x67, 0x4d, 0x61,
-	0x78, 0x41, 0x6e, 0x64, 0x4d, 0x69, 0x6e, 0x53, 0x65, 0x71, 0x52, 0x65, 0x71, 0x2a, 0x2a, 0x0a,
-	0x09, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x54, 0x79, 0x70, 0x65, 0x12, 0x08, 0x0a, 0x04, 0x4e, 0x4f,
-	0x4e, 0x45, 0x10, 0x00, 0x12, 0x09, 0x0a, 0x05, 0x45, 0x56, 0x45, 0x4e, 0x54, 0x10, 0x01, 0x12,
-	0x08, 0x0a, 0x04, 0x50, 0x55, 0x53, 0x48, 0x10, 0x02, 0x42, 0x04, 0x5a, 0x02, 0x2e, 0x2f, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x71, 0x52, 0x65, 0x71, 0x42, 0x06, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x42, 0x0a, 0x0a,
+	0x53, 0x65, 0x6e, 0x64, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x65,
+	0x73, 0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x65, 0x73, 0x63, 0x12, 0x20,
+	0x0a, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x53,
+	0x65, 0x6e, 0x64, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x32, 0x52, 0x04, 0x69, 0x6e, 0x66, 0x6f,
+	0x22, 0x59, 0x0a, 0x0b, 0x53, 0x65, 0x6e, 0x64, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x32, 0x12,
+	0x14, 0x0a, 0x05, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
+	0x65, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0c, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x20, 0x0a, 0x05, 0x74, 0x6f, 0x70,
+	0x69, 0x63, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x0a, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63,
+	0x54, 0x79, 0x70, 0x65, 0x52, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x22, 0x25, 0x0a, 0x13, 0x52,
+	0x65, 0x63, 0x72, 0x75, 0x69, 0x74, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x6f, 0x6f, 0x6c, 0x52,
+	0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02,
+	0x69, 0x64, 0x22, 0xe9, 0x02, 0x0a, 0x04, 0x52, 0x65, 0x73, 0x70, 0x12, 0x1e, 0x0a, 0x0a, 0x69,
+	0x64, 0x65, 0x6e, 0x74, 0x69, 0x66, 0x69, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x0a, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x66, 0x69, 0x65, 0x72, 0x12, 0x1c, 0x0a, 0x09, 0x6f,
+	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
+	0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x14, 0x0a, 0x05, 0x6d, 0x73, 0x67,
+	0x49, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x6d, 0x73, 0x67, 0x49, 0x64, 0x12,
+	0x2d, 0x0a, 0x08, 0x70, 0x75, 0x73, 0x68, 0x44, 0x61, 0x74, 0x61, 0x18, 0x06, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x0f, 0x2e, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x4d, 0x73, 0x67, 0x44, 0x61,
+	0x74, 0x61, 0x48, 0x00, 0x52, 0x08, 0x70, 0x75, 0x73, 0x68, 0x44, 0x61, 0x74, 0x61, 0x12, 0x4b,
+	0x0a, 0x14, 0x70, 0x75, 0x6c, 0x6c, 0x4d, 0x73, 0x67, 0x42, 0x79, 0x53, 0x65, 0x71, 0x4c, 0x69,
+	0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x50,
+	0x75, 0x6c, 0x6c, 0x4d, 0x73, 0x67, 0x42, 0x79, 0x53, 0x65, 0x71, 0x4c, 0x69, 0x73, 0x74, 0x52,
+	0x65, 0x73, 0x70, 0x48, 0x00, 0x52, 0x14, 0x70, 0x75, 0x6c, 0x6c, 0x4d, 0x73, 0x67, 0x42, 0x79,
+	0x53, 0x65, 0x71, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x45, 0x0a, 0x10, 0x6d,
+	0x61, 0x78, 0x41, 0x6e, 0x64, 0x4d, 0x69, 0x6e, 0x53, 0x65, 0x71, 0x52, 0x65, 0x73, 0x70, 0x18,
+	0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x47, 0x65, 0x74, 0x4d, 0x73, 0x67, 0x4d, 0x61,
+	0x78, 0x41, 0x6e, 0x64, 0x4d, 0x69, 0x6e, 0x53, 0x65, 0x71, 0x52, 0x65, 0x73, 0x70, 0x48, 0x00,
+	0x52, 0x10, 0x6d, 0x61, 0x78, 0x41, 0x6e, 0x64, 0x4d, 0x69, 0x6e, 0x53, 0x65, 0x71, 0x52, 0x65,
+	0x73, 0x70, 0x12, 0x42, 0x0a, 0x11, 0x70, 0x75, 0x6c, 0x6c, 0x53, 0x65, 0x71, 0x46, 0x69, 0x6e,
+	0x69, 0x73, 0x68, 0x52, 0x65, 0x73, 0x70, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12, 0x2e,
+	0x50, 0x75, 0x6c, 0x6c, 0x53, 0x65, 0x71, 0x46, 0x69, 0x6e, 0x69, 0x73, 0x68, 0x52, 0x65, 0x73,
+	0x70, 0x48, 0x00, 0x52, 0x11, 0x70, 0x75, 0x6c, 0x6c, 0x53, 0x65, 0x71, 0x46, 0x69, 0x6e, 0x69,
+	0x73, 0x68, 0x52, 0x65, 0x73, 0x70, 0x42, 0x06, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0xd7,
+	0x01, 0x0a, 0x0e, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x6c, 0x4d, 0x73, 0x67, 0x44, 0x61, 0x74,
+	0x61, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x05, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x20, 0x0a, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x0a, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x54, 0x79,
+	0x70, 0x65, 0x52, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x12, 0x31, 0x0a, 0x0b, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x0f,
+	0x2e, 0x4d, 0x73, 0x67, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x52,
+	0x0b, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x14, 0x0a, 0x05,
+	0x73, 0x65, 0x71, 0x49, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x73, 0x65, 0x71,
+	0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0c,
+	0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x72, 0x72, 0x43, 0x6f, 0x64,
+	0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52, 0x07, 0x65, 0x72, 0x72, 0x43, 0x6f, 0x64, 0x65,
+	0x12, 0x16, 0x0a, 0x06, 0x65, 0x72, 0x72, 0x4d, 0x73, 0x67, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x06, 0x65, 0x72, 0x72, 0x4d, 0x73, 0x67, 0x22, 0x62, 0x0a, 0x14, 0x52, 0x65, 0x63, 0x72,
+	0x75, 0x69, 0x74, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x6f, 0x6f, 0x6c, 0x52, 0x65, 0x73, 0x70,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64,
+	0x12, 0x18, 0x0a, 0x07, 0x63, 0x61, 0x72, 0x64, 0x49, 0x64, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28,
+	0x05, 0x52, 0x07, 0x63, 0x61, 0x72, 0x64, 0x49, 0x64, 0x73, 0x12, 0x20, 0x0a, 0x0b, 0x6c, 0x75,
+	0x63, 0x6b, 0x43, 0x61, 0x72, 0x64, 0x49, 0x64, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x05, 0x52,
+	0x0b, 0x6c, 0x75, 0x63, 0x6b, 0x43, 0x61, 0x72, 0x64, 0x49, 0x64, 0x73, 0x22, 0x15, 0x0a, 0x13,
+	0x50, 0x75, 0x6c, 0x6c, 0x4d, 0x73, 0x67, 0x42, 0x79, 0x53, 0x65, 0x71, 0x4c, 0x69, 0x73, 0x74,
+	0x52, 0x65, 0x71, 0x22, 0x17, 0x0a, 0x15, 0x47, 0x65, 0x74, 0x4d, 0x73, 0x67, 0x4d, 0x61, 0x78,
+	0x41, 0x6e, 0x64, 0x4d, 0x69, 0x6e, 0x53, 0x65, 0x71, 0x52, 0x65, 0x71, 0x22, 0x9e, 0x01, 0x0a,
+	0x14, 0x50, 0x75, 0x6c, 0x6c, 0x4d, 0x73, 0x67, 0x42, 0x79, 0x53, 0x65, 0x71, 0x4c, 0x69, 0x73,
+	0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x61, 0x67, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x03, 0x61, 0x67, 0x65, 0x12, 0x1c, 0x0a, 0x03, 0x70,
+	0x65, 0x61, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x08, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x6f,
+	0x6e, 0x41, 0x48, 0x00, 0x52, 0x03, 0x70, 0x65, 0x61, 0x12, 0x1c, 0x0a, 0x03, 0x70, 0x65, 0x62,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x08, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x42,
+	0x48, 0x00, 0x52, 0x03, 0x70, 0x65, 0x62, 0x12, 0x1c, 0x0a, 0x03, 0x70, 0x65, 0x63, 0x18, 0x05,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x08, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x43, 0x48, 0x00,
+	0x52, 0x03, 0x70, 0x65, 0x63, 0x42, 0x06, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0x37, 0x0a,
+	0x07, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x41, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07,
+	0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x37, 0x0a, 0x07, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e,
+	0x42, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22,
+	0x37, 0x0a, 0x07, 0x50, 0x65, 0x72, 0x73, 0x6f, 0x6e, 0x43, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61,
+	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x18,
+	0x0a, 0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x07, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x22, 0x18, 0x0a, 0x16, 0x47, 0x65, 0x74, 0x4d,
+	0x73, 0x67, 0x4d, 0x61, 0x78, 0x41, 0x6e, 0x64, 0x4d, 0x69, 0x6e, 0x53, 0x65, 0x71, 0x52, 0x65,
+	0x73, 0x70, 0x22, 0x13, 0x0a, 0x11, 0x50, 0x75, 0x6c, 0x6c, 0x53, 0x65, 0x71, 0x46, 0x69, 0x6e,
+	0x69, 0x73, 0x68, 0x52, 0x65, 0x73, 0x70, 0x2a, 0x2a, 0x0a, 0x09, 0x54, 0x6f, 0x70, 0x69, 0x63,
+	0x54, 0x79, 0x70, 0x65, 0x12, 0x08, 0x0a, 0x04, 0x4e, 0x4f, 0x4e, 0x45, 0x10, 0x00, 0x12, 0x09,
+	0x0a, 0x05, 0x45, 0x56, 0x45, 0x4e, 0x54, 0x10, 0x01, 0x12, 0x08, 0x0a, 0x04, 0x50, 0x55, 0x53,
+	0x48, 0x10, 0x02, 0x2a, 0x26, 0x0a, 0x0e, 0x4d, 0x73, 0x67, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
+	0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x09, 0x0a, 0x05, 0x46, 0x49, 0x52, 0x53, 0x54, 0x10, 0x00,
+	0x12, 0x09, 0x0a, 0x05, 0x54, 0x48, 0x49, 0x52, 0x44, 0x10, 0x01, 0x42, 0x04, 0x5a, 0x02, 0x2e,
+	0x2f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -426,26 +1244,47 @@ func file_wfl_proto_rawDescGZIP() []byte {
 	return file_wfl_proto_rawDescData
 }
 
-var file_wfl_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_wfl_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_wfl_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_wfl_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_wfl_proto_goTypes = []interface{}{
-	(TopicType)(0),                // 0: TopicType
-	(*Req)(nil),                   // 1: Req
-	(*SendMsgReq)(nil),            // 2: SendMsgReq
-	(*RecruitQueryPoolReq)(nil),   // 3: RecruitQueryPoolReq
-	(*PullMsgBySeqListReq)(nil),   // 4: PullMsgBySeqListReq
-	(*GetMsgMaxAndMinSeqReq)(nil), // 5: GetMsgMaxAndMinSeqReq
+	(TopicType)(0),                 // 0: TopicType
+	(MsgContentType)(0),            // 1: MsgContentType
+	(*Req)(nil),                    // 2: Req
+	(*SendMsgReq)(nil),             // 3: SendMsgReq
+	(*SendMsgReq2)(nil),            // 4: SendMsgReq2
+	(*RecruitQueryPoolReq)(nil),    // 5: RecruitQueryPoolReq
+	(*Resp)(nil),                   // 6: Resp
+	(*GeneralMsgData)(nil),         // 7: GeneralMsgData
+	(*RecruitQueryPoolResp)(nil),   // 8: RecruitQueryPoolResp
+	(*PullMsgBySeqListReq)(nil),    // 9: PullMsgBySeqListReq
+	(*GetMsgMaxAndMinSeqReq)(nil),  // 10: GetMsgMaxAndMinSeqReq
+	(*PullMsgBySeqListResp)(nil),   // 11: PullMsgBySeqListResp
+	(*PersonA)(nil),                // 12: PersonA
+	(*PersonB)(nil),                // 13: PersonB
+	(*PersonC)(nil),                // 14: PersonC
+	(*GetMsgMaxAndMinSeqResp)(nil), // 15: GetMsgMaxAndMinSeqResp
+	(*PullSeqFinishResp)(nil),      // 16: PullSeqFinishResp
 }
 var file_wfl_proto_depIdxs = []int32{
-	2, // 0: Req.sendMsgReq:type_name -> SendMsgReq
-	4, // 1: Req.pullMsgBySeqListReq:type_name -> PullMsgBySeqListReq
-	5, // 2: Req.maxAndMinSeqReq:type_name -> GetMsgMaxAndMinSeqReq
-	0, // 3: SendMsgReq.topic:type_name -> TopicType
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	3,  // 0: Req.sendMsgReq:type_name -> SendMsgReq
+	9,  // 1: Req.pullMsgBySeqListReq:type_name -> PullMsgBySeqListReq
+	10, // 2: Req.maxAndMinSeqReq:type_name -> GetMsgMaxAndMinSeqReq
+	4,  // 3: SendMsgReq.info:type_name -> SendMsgReq2
+	0,  // 4: SendMsgReq2.topic:type_name -> TopicType
+	7,  // 5: Resp.pushData:type_name -> GeneralMsgData
+	11, // 6: Resp.pullMsgBySeqListResp:type_name -> PullMsgBySeqListResp
+	15, // 7: Resp.maxAndMinSeqResp:type_name -> GetMsgMaxAndMinSeqResp
+	16, // 8: Resp.pullSeqFinishResp:type_name -> PullSeqFinishResp
+	0,  // 9: GeneralMsgData.topic:type_name -> TopicType
+	1,  // 10: GeneralMsgData.contentType:type_name -> MsgContentType
+	12, // 11: PullMsgBySeqListResp.pea:type_name -> PersonA
+	13, // 12: PullMsgBySeqListResp.peb:type_name -> PersonB
+	14, // 13: PullMsgBySeqListResp.pec:type_name -> PersonC
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_wfl_proto_init() }
@@ -479,7 +1318,7 @@ func file_wfl_proto_init() {
 			}
 		}
 		file_wfl_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RecruitQueryPoolReq); i {
+			switch v := v.(*SendMsgReq2); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -491,7 +1330,7 @@ func file_wfl_proto_init() {
 			}
 		}
 		file_wfl_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PullMsgBySeqListReq); i {
+			switch v := v.(*RecruitQueryPoolReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -503,7 +1342,127 @@ func file_wfl_proto_init() {
 			}
 		}
 		file_wfl_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Resp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_wfl_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GeneralMsgData); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_wfl_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RecruitQueryPoolResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_wfl_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PullMsgBySeqListReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_wfl_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetMsgMaxAndMinSeqReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_wfl_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PullMsgBySeqListResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_wfl_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PersonA); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_wfl_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PersonB); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_wfl_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PersonC); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_wfl_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetMsgMaxAndMinSeqResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_wfl_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PullSeqFinishResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -520,13 +1479,24 @@ func file_wfl_proto_init() {
 		(*Req_PullMsgBySeqListReq)(nil),
 		(*Req_MaxAndMinSeqReq)(nil),
 	}
+	file_wfl_proto_msgTypes[4].OneofWrappers = []interface{}{
+		(*Resp_PushData)(nil),
+		(*Resp_PullMsgBySeqListResp)(nil),
+		(*Resp_MaxAndMinSeqResp)(nil),
+		(*Resp_PullSeqFinishResp)(nil),
+	}
+	file_wfl_proto_msgTypes[9].OneofWrappers = []interface{}{
+		(*PullMsgBySeqListResp_Pea)(nil),
+		(*PullMsgBySeqListResp_Peb)(nil),
+		(*PullMsgBySeqListResp_Pec)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_wfl_proto_rawDesc,
-			NumEnums:      1,
-			NumMessages:   5,
+			NumEnums:      2,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

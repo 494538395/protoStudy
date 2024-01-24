@@ -1,14 +1,24 @@
+
+
+
+
+
+
 {
-  "identifier": 1,
+  "identifier": 1001,
   "operation": "admin",
   "msgId": "100",
-  "data": {
-    "event": "recruit.query.pool",
-    "topic": "wlf-battle",
-    "data": {
-      "id": 100
+  "sendMsgReq": {
+    "desc": "hello",
+    "sendMsgReq2": {
+      "event": "recruit.query.pool",
+      "topic": "PUSH",
+      "data": {
+        "id": 100
+      }
     }
   }
 }
+
 
 

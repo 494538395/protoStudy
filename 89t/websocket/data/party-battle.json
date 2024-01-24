@@ -1,0 +1,15 @@
+
+
+
+
+
+
+
+{
+  "event": "hamster.change.direction",
+  "id": 150,
+  "data": {
+    "userID": "user01",
+    "newDirection": 3.14
+  }
+}
