@@ -1,0 +1,1699 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+option go_package = "common/proto/sdk_ws;server_api_params";
+package server_api_params;
+
+
+////////////////////////////////base///////////////////////////////
+
+
+message GroupInfo{
+  string groupID = 1;
+  string groupName = 2;
+  string notification = 3;
+  string introduction = 4;
+  string faceURL = 5;
+  string ownerUserID = 6;
+  uint32 createTime = 7;
+  uint32 memberCount = 8;
+  string ex = 9;
+  int32 status = 10;
+  string creatorUserID = 11;
+  int32 groupType = 12;
+  int32 needVerification = 13;
+  int32 lookMemberInfo = 14;
+  int32 applyMemberFriend = 15;
+  uint32 notificationUpdateTime = 16;
+  string notificationUserID = 17;
+  int32 muteSwitch = 18; // 禁言开关  0关，1开
+  int32 inviteSwitch = 19; // 战队成员的邀请权限  0没有，1有权限
+  int32 recommendSwitch = 20; // 战队招募开关  0关闭，1开启
+  GroupRole  groupRole = 21; // 战队职位
+  string lang = 22; // 群组语言
+  int32 pveLimit = 23; // 加入公会的pve章节限制
+}
+
+message GroupRole {
+  repeated RoleInfo roleInfo = 1;
+}
+
+message RoleInfo {
+  int32 roleId = 1;
+  string roleName = 2;
+  uint32 rolePower = 3;
+  int32 notEditable = 4;  // 该角色不可编辑   0则代表可编辑 1代表不可编辑
+}
+
+message GroupInfoForSet{
+  string groupID = 1;
+  string groupName = 2;
+  string notification = 3;
+  string introduction = 4;
+  string faceURL = 5;
+  string ex = 6;
+  google.protobuf.Int32Value needVerification = 7;
+  google.protobuf.Int32Value lookMemberInfo = 8;
+  google.protobuf.Int32Value applyMemberFriend = 9;
+  int32 groupType = 10;
+  string lang = 11; // 群组语言
+  google.protobuf.Int32Value pveLimit = 12;
+}
+
+
+message GroupMemberFullInfo {
+  string groupID = 1 ;
+  UserInfo userInfo = 2; // 用户信息
+  int32 roleLevel = 3;
+  int32 joinTime = 4;
+  int32 joinSource = 5;
+  string operatorUserID = 6;
+  string ex = 7;
+  uint32 muteEndTime = 8;
+  string inviterUserID = 9;
+}
+
+message RankUserInfo {
+  UserInfo userInfo = 1; // 用户信息
+  int32 score = 2; // 积分
+  int32 rank = 3; // 排名
+}
+
+message UserInfo{
+  string userID = 1;
+  string nickname = 2;
+  string faceURL = 3; // 头像
+  string avf = 4;  // 头像框
+  uint32 regTime = 5;
+  uint32 lastLogin = 6;
+  GroupMemberFullInfo opUser = 7; // 公会成员信息
+  GroupInfo  groupInfo = 8; // 公会和职位信息
+  string clanID = 9;
+  int32 pvpScore = 10; // 杯数
+  int32 pvpRank = 11; // 排名
+  int32 exp = 12; // 经验值
+  int32 pvpStage = 13; // 当前段位
+  string country = 14; // 国家
+  int32 camp = 15; // 所属阵营
+  int32 prestige = 16; // 个人声望值
+  repeated int32 tag = 17; // 标签
+  int32 countryLv = 18; // 国家等级
+  UserBdRoad userBdRoad = 19;  // 建造之路信息
+  int64 bpTag = 20; // bp标签 过期时间
+}
+
+message UserBdRoad {
+  int32 BuildExp = 1;  // 建造经验值
+  int32 BuildLv = 2; // 建造等级
+  int32 HpLimit = 3; // 水费上限
+}
+
+// 用户关注信息
+message UserWatchInfo{
+  string userID = 1; //用户id
+  int32 onlineStatus = 2; // 在线状态
+  int64 lastOnlineTs = 3; // 上次在线时间戳(onlineStatus是离线时 有数据)
+}
+
+// 用户关注列表通知
+message UserWatchlistTips {
+  repeated UserWatchInfo userWatchlist = 1;
+}
+
+message UserInfoUpdateReq {
+  string userId = 1;
+  map<string, string> userfields = 2;
+}
+
+message UserInfoUpdateResp {
+  UserInfo userInfo = 1; // 修改用户信息同步
+}
+
+//@send user.info.query
+message UserInfoQueryReq {
+  string userId = 1;
+}
+
+//@push user.info.query
+message UserInfoQueryResp {
+  UserInfo userInfo = 1; // 用户信息查询
+}
+
+
+message SyncUserInfoResp {
+  UserInfo userInfo = 1; // 同步用户信息（基础即可，不用含有公会和职位）
+  repeated string avatarList = 2; // 头像id
+}
+
+message SyncUserStatusResp {
+  repeated UserWatchInfo userWatchlist = 1;//用户关注列表及在线状态
+}
+
+message FriendInfo{
+  string ownerUserID = 1;
+  string remark = 2;
+  uint32 createTime = 3;
+  UserInfo friendUser = 4;
+  int32 addSource = 5;
+  string operatorUserID = 6;
+  string ex = 7;
+}
+
+message BlackInfo{
+  string ownerUserID = 1;
+  uint32 createTime = 2;
+  UserInfo blackUserInfo = 3;
+  int32 addSource = 4;
+  string operatorUserID = 5;
+  string ex = 6;
+}
+
+message GroupRequest{
+  UserInfo userInfo = 1;
+  GroupInfo groupInfo = 2;
+  int32 handleResult = 3;
+  string reqMsg = 4;
+  string  handleMsg = 5;
+  uint32 reqTime = 6;
+  string handleUserID = 7;
+  uint32 handleTime = 8;
+  string ex = 9;
+  int32 joinSource = 10;
+  string inviterUserID = 11;
+}
+
+message FriendRequest{
+  string fromUserID = 1;
+  string fromNickname = 2;
+  string fromFaceURL = 3;
+  int32 fromGender = 4;
+  string toUserID = 5;
+  string toNickname = 6;
+  string toFaceURL = 7;
+  int32 toGender = 8;
+  int32 handleResult = 9;
+  string reqMsg = 10;
+  uint32 createTime = 11;
+  string handlerUserID = 12;
+  string handleMsg = 13;
+  uint32 handleTime = 14;
+  string ex = 15;
+}
+
+
+
+
+///////////////////////////////////base end/////////////////////////////////////
+message PullMessageBySeqListReq{
+  string userID = 1;
+  string operationID = 2;
+  repeated uint32 seqList = 3;
+  map <string, SeqList>groupSeqList = 4;
+}
+
+message PullMessageBySeqListResp {
+  int32 errCode = 1;
+  string errMsg = 2;
+  repeated MsgData list = 3;
+  map<string, MsgDataList> groupMsgDataList = 4;
+}
+
+message GetMaxAndMinSeqReq {
+  repeated string groupIDList = 1;
+  string userID = 2;
+  string  operationID = 3;
+}
+
+message GetMaxAndMinSeqResp {
+  uint32 maxSeq = 1;
+  uint32 minSeq = 2;
+  int32 errCode = 3;
+  string errMsg = 4;
+  map<string, MaxAndMinSeq> groupMaxAndMinSeq = 5;
+}
+
+message UserSendMsgResp {
+  string serverMsgID = 1;
+  string clientMsgID = 2;
+  int64  sendTime = 3;
+}
+
+message MsgData {
+  string  sendID = 1;
+  string  recvID = 2;
+  string groupID = 3;
+  string clientMsgID = 4;
+  string serverMsgID = 5;
+  int32 senderPlatformID = 6;
+  string  senderNickname = 7;
+  string  senderFaceURL = 8;
+  int32   sessionType = 9;
+  int32 msgFrom = 10;
+  int32 contentType = 11;
+  bytes content = 12;
+  uint32 seq = 14;
+  int64 sendTime = 15;
+  int64 createTime = 16;
+  int32 status = 17;
+  map<string, bool> options = 18;
+  OfflinePushInfo offlinePushInfo = 19;
+  repeated string atUserIDList = 20;
+  bytes msgDataList = 21;
+  string attachedInfo = 22;
+  string  ex = 23;
+  int32  topic = 24;
+  int32 groupType = 25;
+
+  bool   isReact = 40;
+  bool isExternalExtensions = 41;
+  int64 msgFirstModifyTime = 42;
+}
+
+message OfflinePushInfo{
+  string title = 1;
+  string desc = 2;
+  string ex = 3;
+  string iOSPushSound = 4;
+  bool iOSBadgeCount = 5;
+}
+//@push chat.send
+message MsgDataResp {
+  int32 errCode = 1;
+  string errMsg = 2;
+  string serverMsgID = 4; // 不返回
+  string clientMsgID = 5; // 不返回
+  int64  sendTime = 6;   // 实际不返回
+}
+
+message TipsComm{
+  bytes detail = 1;
+  string defaultTips = 2;
+  string jsonDetail = 3;
+  int32 tipsType = 4;
+}
+
+//@push test.jerry.v1
+message Person01 {
+  int32 errCode = 1;
+  string errMsg = 2;
+  string serverMsgID = 4; // 不返回
+  string clientMsgID = 5; // 不返回
+  int64  sendTime = 6;   // 实际不返回
+}
+
+//////////////////////group/////////////////////
+
+
+//	OnGroupCreated()
+message GroupCreatedTips{
+  GroupInfo group = 1;
+  repeated GroupMemberFullInfo memberList = 3;
+  int64 operationTime = 4;
+}
+
+
+
+//	OnGroupInfoSet()
+message GroupInfoSetTips{
+  int64 muteTime = 1;
+  GroupInfo group = 2;
+}
+
+//	OnJoinGroupApplication()
+message JoinGroupApplicationTips{
+  GroupRequest groupRequest = 1;
+  string  reqMsg = 2;
+}
+
+//	OnQuitGroup()
+//Actively leave the group
+message MemberQuitTips{
+  string groupID = 1;
+  string userID = 2;
+  int64 operationTime = 3;
+  int32 groupType = 4;
+}
+
+
+//	OnApplicationGroupAccepted()
+message GroupApplicationRespTips{
+  GroupRequest groupRequest = 1;
+  int32 receiverAs = 2;  // admin(==1) or applicant(==0)
+}
+
+
+//	OnTransferGroupOwner()
+message GroupOwnerTransferredTips{
+  string groupID = 1;
+  GroupMemberFullInfo opUser = 2;
+  GroupMemberFullInfo newGroupOwner = 3;
+  int64 operationTime = 4;
+  int32 groupType = 5;
+}
+
+
+//	OnMemberKicked()
+message MemberKickedTips{
+  string groupID = 1;
+  repeated string kickedUserList = 2;
+  int64 operationTime = 3;
+  int32 groupType = 4;
+}
+
+//	OnMemberAdded()
+message MemberAddedTips{
+  string groupID = 1;
+  repeated GroupMemberFullInfo invitedUserList = 2;
+  int64 operationTime = 3;
+  int32 groupType = 4;
+}
+
+// onMemberBeInvitedToBattleTeamTips()   玩家被邀请加入战队通知
+message BeInvitedToGroupTips{
+  GroupInfo group = 1;
+  UserInfo fromUser = 2;
+  int64 operationTime = 4;
+}
+
+// 你邀请的玩家同意/拒绝战队邀请
+message MemberBeInvitedToGroupTips {
+  int32 handleResult = 1;   // 1同意  0拒绝
+  string groupId = 2;  // 战队信息
+  UserInfo inviteUser = 3; // 被邀请的人
+}
+
+
+
+//Actively join the group
+message MemberEnterTips{
+  string groupID = 1;
+  GroupMemberFullInfo entrantUser = 2;
+  int64 operationTime = 3;
+  int32 groupType = 4;
+}
+
+message GroupDismissedTips{
+  GroupInfo group = 1;
+  GroupMemberFullInfo opUser = 2;
+  int64 operationTime = 3;
+}
+
+message GroupMemberMutedTips{
+  GroupInfo group = 1;
+  GroupMemberFullInfo opUser = 2;
+  int64 operationTime = 3;
+  GroupMemberFullInfo mutedUser = 4;
+  uint32 mutedSeconds = 5;
+}
+
+message GroupMemberCancelMutedTips{
+  GroupInfo group = 1;
+  GroupMemberFullInfo opUser = 2;
+  int64 operationTime = 3;
+  GroupMemberFullInfo mutedUser = 4;
+}
+
+message GroupMutedTips{
+  GroupInfo group = 1;
+  GroupMemberFullInfo opUser = 2;
+  int64 operationTime = 3;
+}
+
+message GroupCancelMutedTips{
+  GroupInfo group = 1;
+  GroupMemberFullInfo opUser = 2;
+  int64 operationTime = 3;
+}
+
+message GroupMemberInfoSetTips{
+  string groupID = 1;
+  int64 operationTime = 2;
+  GroupMemberFullInfo changedUser = 4;
+}
+
+message GroupSwitchTips{
+  string groupID = 1;
+  int32 switch = 2;  // 0:关闭 1:开启
+  int64 operationTime = 3;
+  int32 groupType = 4;
+}
+
+message GroupRoleAddedTips{
+  string groupID = 1;
+  RoleInfo roleInfo = 2;
+  int64 operationTime = 3;
+}
+
+message GroupRoleUpdateTips{
+  string groupID = 1;
+  RoleInfo roleInfo = 2;
+  int64 operationTime = 3;
+}
+
+message GroupListInfo{
+  GroupInfo groupInfo = 1; // 群组信息
+  repeated GroupMemberFullInfo memberList = 2; // 当前群组成员列表
+}
+
+message SyncGroupResp{
+  repeated GroupRequest groupRequestList = 1; // 加群的申请列表
+  repeated GroupRequest groupManageRequestList = 2; // 管理的申请列表
+  repeated GroupListInfo groupList = 3; // 所有群列表
+}
+
+
+
+
+//////////////////////friend/////////////////////
+//message FriendInfo{
+//  UserInfo OwnerUser = 1;
+//  string Remark = 2;
+//  uint64 CreateTime = 3;
+//  UserInfo FriendUser = 4;
+//}
+
+message FriendApplication{
+  int64 addTime = 1;
+  string addSource = 2;
+  string addWording = 3;
+}
+
+message FromToUserID{
+  string fromUserID = 1;
+  string toUserID = 2;
+}
+
+//FromUserID apply to add ToUserID
+message FriendApplicationTips{
+  FriendRequest  fromToUser = 1;
+}
+
+
+
+// 拒绝-接受from(操作人)  to（接受人）
+message FriendApplicationResultTips{
+  string fromUserId = 1;
+  string toUserId = 2;
+  int32 handleResult = 3;
+}
+
+
+// 拒绝-接受from(操作人)  to 被操作的人列表
+message MultiFriendApplicationResultTips{
+  string fromUserId = 1;
+  repeated string toUserIdList = 2;
+  int32 handleResult = 3;
+}
+
+
+
+//@push test.jerry.v2
+message Person02 {
+  int32 errCode = 1;
+  string errMsg = 2;
+  string serverMsgID = 4; // 不返回
+  string clientMsgID = 5; // 不返回
+  int64  sendTime = 6;   // 实际不返回
+}
+
+//@push friend.notification
+message FriendAllApplicationResultTips{  // 一键处理全部好友审批结果的通知
+  repeated int32 userIdList = 1;  // 本次处理的id列表
+  int32 handleResult = 2;
+}
+
+//@push test.jerry.v3
+message Person03 {
+  int32 errCode = 1;
+  string errMsg = 2;
+  string serverMsgID = 4; // 不返回
+  string clientMsgID = 5; // 不返回
+  int64  sendTime = 6;   // 实际不返回
+}
+
+
+// 添加好友通知，friend为好友数据
+message FriendAddedTips{
+  FriendInfo friend = 1;
+  int64 operationTime = 2;
+}
+
+// 批量添加好友通知
+message MultiFriendAddedTips{
+  repeated FriendInfo friendList = 1;
+  int64 operationTime = 2;
+}
+
+// FromUserID  deleted a friend ToUserID
+message FriendDeletedTips{// todo 待定
+  string userID = 1;
+}
+
+message BlackAddedTips{
+  FromToUserID fromToUserID = 1;
+}
+
+message BlackDeletedTips{
+  FromToUserID fromToUserID = 1;
+}
+
+message FriendInfoChangedTips{
+  FromToUserID fromToUserID = 1;
+}
+
+message SyncFriendResp{
+  repeated FriendInfo friendInfoList = 1;  // 好友列表
+  repeated FriendRequest friendRequestList = 2; // 发送的申请列表
+  repeated FriendRequest friendpManageRequestList = 3; // 管理的申请列表
+}
+
+//////////////////////user/////////////////////
+message UserInfoUpdatedTips{
+  string userID = 1;
+}
+
+//////////////////////conversation/////////////////////
+message ConversationUpdateTips{
+  Conversation conversation = 1;
+  int64 updateTime = 2;
+}
+
+message ConversationSetPrivateTips{
+  string recvID = 1;
+  string sendID = 2;
+  bool isPrivate = 3;
+}
+
+message SyncConversationResp{
+  repeated Conversation conversationList = 1;
+}
+
+////////////////////message///////////////////////
+message DeleteMessageTips{
+  string opUserID = 1;
+  string userID = 2;
+  repeated uint32 seqList = 3;
+}
+
+message RequestPagination {
+  int32 pageNumber = 1;
+  int32 showNumber = 2;
+}
+
+message ResponsePagination {
+  int32 CurrentPage = 5;
+  int32 ShowNumber = 6;
+}
+
+
+///////////////////signal//////////////
+message SignalReq {
+  oneof payload {
+    SignalInviteReq invite = 1;
+    SignalInviteInGroupReq inviteInGroup = 2;
+    SignalCancelReq  cancel = 3;
+    SignalAcceptReq accept = 4;
+    SignalHungUpReq hungUp = 5;
+    SignalRejectReq reject = 6;
+    SignalGetRoomByGroupIDReq getRoomByGroupID = 7;
+
+    SignalOnRoomParticipantConnectedReq onRoomParticipantConnectedReq = 8;
+    SignalOnRoomParticipantDisconnectedReq onRoomParticipantDisconnectedReq = 9;
+    SignalGetTokenByRoomIDReq getTokenByRoomID = 10;
+  }
+}
+
+message SignalResp {
+  oneof payload {
+    SignalInviteReply invite = 1;
+    SignalInviteInGroupReply inviteInGroup = 2;
+    SignalCancelReply cancel = 3;
+    SignalAcceptReply accept = 4;
+    SignalHungUpReply hungUp = 5;
+    SignalRejectReply reject = 6;
+    SignalGetRoomByGroupIDReply getRoomByGroupID = 7;
+    SignalGetTokenByRoomIDReply getTokenByRoomID = 8;
+  }
+}
+
+
+message InvitationInfo  {
+  string inviterUserID = 1;
+  repeated string inviteeUserIDList = 2;
+  string customData = 3;
+  string  groupID = 4;
+  string roomID = 5;
+  int32 timeout = 6;
+  string mediaType = 7;
+  int32 platformID = 8;
+  int32 sessionType = 9;
+  int32 initiateTime = 10;
+  repeated string busyLineUserIDList = 11;
+}
+
+message ParticipantMetaData{
+  GroupInfo groupInfo = 1;
+  GroupMemberFullInfo groupMemberInfo = 2;
+  UserInfo userInfo = 3;
+}
+
+message SignalInviteReq {
+  string opUserID = 1;
+  InvitationInfo invitation = 2;
+  OfflinePushInfo offlinePushInfo = 3;
+  ParticipantMetaData participant = 4;
+
+}
+
+message SignalInviteReply {
+  string token = 1;
+  string roomID = 2;
+  string liveURL = 3;
+  repeated string busyLineUserIDList = 4;
+}
+
+message SignalInviteInGroupReq {
+  string opUserID = 1;
+  InvitationInfo invitation = 2;
+  OfflinePushInfo offlinePushInfo = 3;
+  ParticipantMetaData participant = 4;
+}
+
+message SignalInviteInGroupReply {
+  string token = 1;
+  string roomID = 2;
+  string liveURL = 3;
+  repeated string busyLineUserIDList = 4;
+}
+
+message SignalCancelReq {
+  string opUserID = 1;
+  InvitationInfo invitation = 2;
+  OfflinePushInfo offlinePushInfo = 3;
+  ParticipantMetaData participant = 4;
+}
+
+message SignalCancelReply {
+
+}
+
+message SignalAcceptReq {
+  string opUserID = 1;
+  InvitationInfo invitation = 2;
+  OfflinePushInfo offlinePushInfo = 3;
+  ParticipantMetaData participant = 4;
+  int32 opUserPlatformID = 5;
+}
+
+message SignalAcceptReply {
+  string token = 1;
+  string roomID = 2;
+  string liveURL = 3;
+}
+
+message SignalHungUpReq {
+  string opUserID = 1;
+  InvitationInfo invitation = 2;
+  OfflinePushInfo offlinePushInfo = 3;
+}
+
+message SignalHungUpReply {
+
+}
+
+
+message SignalRejectReq {
+  string opUserID = 1;
+  InvitationInfo invitation = 2;
+  OfflinePushInfo offlinePushInfo = 3;
+  ParticipantMetaData participant = 4;
+  int32 opUserPlatformID = 5;
+}
+
+message SignalRejectReply {
+
+}
+
+message SignalGetRoomByGroupIDReq {
+  string opUserID = 1;
+  string groupID = 2;
+  ParticipantMetaData participant = 3;
+}
+
+message SignalGetRoomByGroupIDReply {
+  InvitationInfo invitation = 1;
+  repeated ParticipantMetaData participant = 2;
+  string roomID = 3;
+}
+
+message SignalOnRoomParticipantConnectedReq {
+  InvitationInfo invitation = 1;
+  repeated ParticipantMetaData participant = 2;
+  string groupID = 3;
+}
+
+message SignalOnRoomParticipantDisconnectedReq {
+  InvitationInfo invitation = 1;
+  repeated ParticipantMetaData participant = 2;
+  string groupID = 3;
+}
+
+message SignalGetTokenByRoomIDReq {
+  string roomID = 1;
+  string opUserID = 2;
+  ParticipantMetaData participant = 3;
+  string operationID = 4;
+}
+
+message SignalGetTokenByRoomIDReply {
+  string token = 1;
+  string liveURL = 2;
+}
+
+
+message DelMsgListReq{
+  string opUserID = 1;
+  string userID = 2;
+  repeated uint32 seqList = 3;
+  string operationID = 4;
+}
+
+message DelMsgListResp{
+  int32 errCode = 1;
+  string errMsg = 2;
+}
+
+message SetAppBackgroundStatusReq {
+  string userID = 1;
+  bool isBackground = 2;
+}
+
+message SetAppBackgroundStatusResp {
+  int32 errCode = 1;
+  string errMsg = 2;
+}
+
+message ExtendMsgSet {
+  string sourceID = 1;
+  int32 sessionType = 2;
+  map <string, ExtendMsg>extendMsgs = 3;
+  int64 MaxMsgUpdateTime = 4;
+  int32 extendMsgNum = 5;
+  int64 createTime = 6;
+}
+
+message ExtendMsg {
+  map <string, KeyValue>reactionExtensionList = 1;
+  string clientMsgID = 2;
+  int64 msgFirstModifyTime = 3;
+  string attachedInfo = 4;
+  string ex = 5;
+}
+
+message KeyValue {
+  string typeKey = 1;
+  string value = 2;
+  int64 latestUpdateTime = 3;
+}
+
+
+// 从这开始通用结构
+enum TopicType //枚举 客户端<-->服务器通信的主题
+{
+  Topic_BootSync = 0;    // 启动同步
+
+  Topic_User = 1;  // 用户
+  Topic_Group = 2;  // 群组，包含战队、公会
+  Topic_Chat = 3;  // 聊天消息
+
+  Topic_SystemMail = 4;  // 系统邮件
+  Topic_SystemBroadcast = 5; // 系统广播，读扩散，包括 公告、新闻
+  Topic_SystemBot = 6;  // 客服机器人
+
+  Topic_Gameplay = 7;  // 游戏玩法
+  Topic_Friend = 8;  // 好友，包含好友、黑名单、陌生人
+  Topic_UserStatus = 9;  // 用户状态
+  Topic_Conversation = 10;  // 会话
+  Topic_Grow = 11; // 成长模块
+  Topic_Pvp = 12; // pvp模块
+  Topic_BattlePass = 13; // bp模块
+  Topic_Shop = 14; // 商店模块
+  Topic_Card = 15; // 卡牌模块
+  Topic_Task = 16; // 任务模块
+  Topic_Country = 17; // 国家模块
+  Topic_Recruit = 18; // 招募模块
+  Topic_Resource = 19; // 资源模块
+  Topic_Vip = 20; // vip模块
+  Topic_Pve = 21; // pve模块
+  Topic_Senk = 22; // senk模块
+  Topic_Guide = 23; // 引导模块
+
+  Topic_GroupMailBegin = 100;
+  Topic_GroupMail = 101;   //全体群邮件
+  Topic_GroupMailUS = 102;   //国家群邮件
+  Topic_GroupMailJP = 103;
+  Topic_GroupMailKR = 104;
+  Topic_GroupMailRU = 105;
+  Topic_GroupMailFR = 106;
+  Topic_GroupMailPT = 107;
+  Topic_GroupMailES = 108;
+  Topic_GroupMailGB = 109;
+  Topic_GroupMailCN = 110;
+  Topic_GroupMailEnd = 199;
+}
+
+// 从这开始通用结构
+enum EventName
+{
+  sync_login = 0;    // 启动同步
+  sync_basedata = 1;    // 启动同步
+  sync_grow = 2;    // 启动同步
+
+}
+
+enum MsgContentType // 消息内容类型
+{
+  None = 0;
+
+  Changes = 1;  // 变化
+  LastState = 2;    // 最终状态
+}
+
+enum ChatMsgContentType // 消息内容类型
+{
+  Content_None = 0;
+
+  Text = 101;
+  Picture = 102;
+  Voice = 103;
+  Video = 104;
+  File = 105;
+  AtText = 106;
+  Merger = 107;
+  Card = 108;
+  Location = 109;
+  Custom = 110;
+  Revoke = 111;
+  HasReadReceipt = 112;
+  Typing = 113;
+  Quote = 114;
+  GroupHasReadReceipt = 116;
+  AdvancedText = 117;
+  AdvancedRevoke = 118;
+  CustomNotTriggerConversation = 119;
+  CustomOnlineOnly = 120;
+  ReactionMessageModifier = 121;
+  ReactionMessageDeleter = 122;
+
+  Common = 200;
+  GroupMsg = 201;
+  SignalMsg = 202;
+  CustomNotification = 203;
+
+  // SysRelated
+  NotificationBegin = 1000;
+  DeleteMessageNotification = 1100;
+  FriendApplicationApprovedNotification = 1201;// add_friend_response
+  FriendApplicationRejectedNotification = 1202;// add_friend_response
+  FriendApplicationNotification = 1203;// add_friend
+  FriendAddedNotification = 1204;
+  FriendDeletedNotification = 1205;// delete_friend
+  FriendRemarkSetNotification = 1206;// set_friend_remark?
+  BlackAddedNotification = 1207;// add_black
+  BlackDeletedNotification = 1208;// remove_black
+  FriendInfoUpdatedNotification = 1209;
+
+  ConversationOptChangeNotification = 1300;
+
+  UserNotificationBegin = 1301;
+  UserInfoUpdatedNotification = 1303;
+  UserNotificationEnd = 1399;
+  OANotification = 1400;
+
+  GroupNotificationBegin = 1500;
+
+  GroupCreatedNotification = 1501;
+  GroupInfoSetNotification = 1502;
+  JoinGroupApplicationNotification = 1503;
+  MemberQuitNotification = 1504;
+  GroupApplicationAcceptedNotification = 1505;
+  GroupApplicationRejectedNotification = 1506;
+  GroupOwnerTransferredNotification = 1507;
+  MemberKickedNotification = 1508;
+  MemberInvitedNotification = 1509;
+  MemberEnterNotification = 1510;
+  GroupDismissedNotification = 1511;
+  GroupMemberMutedNotification = 1512;
+  GroupMemberCancelMutedNotification = 1513;
+  GroupMutedNotification = 1514;
+  GroupCancelMutedNotification = 1515;
+  GroupMemberInfoSetNotification = 1516;
+  GroupMemberSetToAdminNotification = 1517;
+  GroupMemberSetToOrdinaryUserNotification = 1518;
+  MemberBeInvitedToGroupNotification = 1519;
+  MemberBeInvitedToGroupResponseNotification = 1520; // 被邀请入群的回复通知
+  MuteSwitchGroupNotification = 1521; // 设置战队禁言开关通知
+  InviteSwitchGroupNotification = 1522; // 设置战队自由邀请开关通知
+  RecommendSwitchGroupNotification = 1523; // 设置战队推荐开关通知
+  GroupRoleAddedNotification = 1524; // 群新增角色
+  GroupRoleUpdateNotification = 1525; // 群修改角色
+
+  SignalingNotificationBegin = 1600;
+  SignalingNotification = 1601;
+  SignalingNotificationEnd = 1649;
+
+  SuperGroupNotificationBegin = 1650;
+  SuperGroupUpdateNotification = 1651;
+  MsgDeleteNotification = 1652;
+  SuperGroupNotificationEnd = 1699;
+
+  ConversationPrivateChatNotification = 1701;
+  ConversationUnreadNotification = 1702;
+
+  BusinessNotificationBegin = 2000;
+  BusinessNotification = 2001;
+  BusinessNotificationEnd = 2099;
+
+  NotificationEnd = 3000;
+}
+
+message CommonResp{
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+}
+
+message Req {// 第一层
+  int32    identifier = 1;
+  string   operation = 2;
+  string   msgId = 3;
+  oneof data {
+    SendMsgReq sendMsgReq = 4;
+    PullMsgBySeqListReq pullMsgBySeqListReq = 5;
+    GetMsgMaxAndMinSeqReq maxAndMinSeqReq = 6;
+  }
+}
+
+//@send chat.send
+message SendMsgReq {
+  string event = 1;
+  bytes data = 2;
+  TopicType topic = 3;
+}
+
+// GetMsgBySeqList
+message PullMsgBySeqListReq{
+  map <int32, SeqList>topicSeqList = 1;
+}
+
+message SeqList {
+  repeated uint32 seqList = 1;
+}
+
+// GetMaxAndMinSeq
+message GetMsgMaxAndMinSeqReq {
+  repeated int32 topicList = 1;
+}
+
+
+message Resp {
+  int32   identifier = 1;
+  string  operation = 2;
+  string  msgId = 3;
+  oneof data {
+    GeneralMsgData pushData = 6;
+    PullMsgBySeqListResp pullMsgBySeqListResp = 7;
+    GetMsgMaxAndMinSeqResp maxAndMinSeqResp = 8;
+    PullSeqFinishResp pullSeqFinishResp = 9;
+    CommonResp networkErr = 10;
+    SyncServerTimeResp syncServerTimeResp = 11;
+  }
+}
+
+message GeneralMsgData {
+  string event = 1;
+  TopicType topic = 2;
+  MsgContentType contentType = 3;
+  uint32 seqId = 4;
+  bytes data = 5;
+  int32   errCode = 6;
+  string  errMsg = 7;
+}
+
+// GetMsgBySeqList
+message PullMsgBySeqListResp {
+  map<int32, MsgDataList> topicMsgDataList = 1;
+  int32   errCode = 2;
+  string  errMsg = 3;
+}
+message MsgDataList {
+  repeated GeneralMsgData msgDataList = 1;
+  int32 needSync = 2; // 0:不需要同步 1:需要同步
+  uint32 lastSeqId = 3; // 拉的太多 需要同步状态，修改本地最大seq。
+}
+
+// GetMaxAndMinSeq
+message GetMsgMaxAndMinSeqResp {
+  map<int32, MaxAndMinSeq> convMaxAndMinSeq = 1;
+  int32   errCode = 2;
+  string  errMsg = 3;
+}
+message MaxAndMinSeq{
+  uint32 maxSeq = 1;
+  uint32 minSeq = 2;
+}
+
+// SyncServerTimeResp
+message SyncServerTimeResp {
+  int64 timestamp = 1;
+}
+
+// 群组模块相关开始 start---------------
+message GroupAddMemberInfo{
+  string UserID = 1;
+  int32 RoleLevel = 2;
+}
+
+message CreateGroupReq{
+  repeated GroupAddMemberInfo InitMemberList = 1;
+  GroupInfo GroupInfo = 2;
+  string OperationID = 3;
+  string OpUserID = 4;  //app manager or group owner
+  string OwnerUserID = 5; //owner
+}
+
+message CreateGroupResp{
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+  GroupInfo GroupInfo = 3;
+}
+
+//@send group.set.info
+message SetGroupInfoReq{
+  GroupInfoForSet groupInfoForSet = 1;
+  string OpUserID = 2; //app manager or group owner
+  string OperationID = 3;
+}
+
+//@push group.set.info
+message SetGroupInfoResp{
+  CommonResp CommonResp = 1;
+}
+
+//@send group.join
+message JoinGroupReq{
+  string GroupID = 1;
+  string ReqMessage = 2;
+  string OpUserID = 3;
+  string OperationID = 4;
+  int32 JoinSource = 5;
+  string InviterUserID = 6;
+  int32 GroupType = 7;
+
+}
+
+//@push group.join
+message JoinGroupResp{
+  CommonResp CommonResp = 1;
+}
+
+//@send group.quit
+message QuitGroupReq{
+  string GroupID = 1;
+  string OperationID = 2;
+  string OpUserID = 3;
+  int32 GroupType = 4;
+}
+
+//@push group.quit
+message QuitGroupResp{
+  CommonResp CommonResp = 1;
+}
+
+//@send group.transfer
+message TransferGroupOwnerReq {
+  string GroupID = 1;
+  string OldOwnerUserID = 2;
+  string NewOwnerUserID = 3;
+  string OperationID = 4;
+  string OpUserID = 5; //app manager or group owner
+  int32 GroupType = 6;
+}
+
+//@push group.transfer
+message TransferGroupOwnerResp{
+  CommonResp CommonResp = 1;
+}
+
+//@send group.application.list
+message GetGroupApplicationListReq {
+  string OpUserID = 1; //app manager or group owner(manager)
+  string OperationID = 2;
+  string FromUserID = 3; //owner or manager
+  int32 GroupType = 4;
+}
+
+//@push group.application.list
+message GetGroupApplicationListResp {
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+  repeated GroupRequest GroupRequestList = 3;
+}
+
+//@send group.application.response
+message GroupApplicationResponseReq{
+  string OperationID = 1;
+  string OpUserID = 2;
+  string GroupID = 3;
+  string FromUserID = 4;  //
+  string HandledMsg = 5;
+  int32 HandleResult = 6;
+  int32 GroupType = 7;
+}
+
+//@push group.application.response
+message GroupApplicationResponseResp{
+  CommonResp CommonResp = 1;
+}
+
+//@send group.req.application.list
+message GetUserReqApplicationListReq{
+  string UserID = 1;
+  string OpUserID = 2;
+  string OperationID = 3;
+  int32 GroupType = 4;
+}
+
+//@push group.req.application.list
+message GetUserReqApplicationListResp{
+  CommonResp CommonResp = 1;
+  repeated GroupRequest GroupRequestList = 2;
+}
+
+//@send group.joined.list
+message GetJoinedGroupListReq {
+  string FromUserID = 1;
+  string operationID = 2;
+  string OpUserID = 3; //app manager or FromUserID
+  int32 GroupType = 4;
+}
+
+//@push group.joined.list
+message GetJoinedGroupListResp{
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+  repeated GroupInfo GroupList = 3;
+}
+
+//@send group.all.member.list
+message GetGroupMemberListReq {
+  string GroupID = 1;
+  string OpUserID = 2;  //No verification permission
+  string OperationID = 3;
+  int32 Filter = 4;
+  int32 NextSeq = 5;
+  int32 GroupType = 6;
+}
+
+//@push group.all.member.list
+message GetGroupMemberListResp {
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+  repeated GroupMemberFullInfo memberList = 3;
+  int32 nextSeq = 4;
+  string GroupID = 5;
+}
+
+//@send group.member.list
+message GetGroupMembersInfoReq {
+  string GroupID = 1;
+  repeated string memberList = 2;
+  string OpUserID = 3;  //No verification permission
+  string OperationID = 4;
+  bool noCache = 5;
+  int32 GroupType = 6;
+}
+
+//@push group.member.list
+message GetGroupMembersInfoResp {
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+  repeated GroupMemberFullInfo memberList = 3;
+  string GroupID = 4;
+}
+
+message Id2Result {
+  string UserID = 1;
+  int32 Result = 2; //0 ok; -1 error
+}
+
+//@send group.add.users
+message AddUserToGroupReq {
+  string OperationID = 2;
+  string GroupID = 3;
+  string Reason = 4;
+  repeated string InvitedUserIDList = 5;
+  string OpUserID = 6; //group member or app manager
+  int32 GroupType = 7;
+}
+
+//@push group.add.users
+message AddUserToGroupResp {
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+  repeated  Id2Result Id2ResultList = 3; // 0 ok, -1 error
+  string GroupID = 4;
+}
+
+//@send group.kick.user
+message KickGroupMemberReq {
+  string GroupID = 1;
+  repeated string KickedUserIDList = 2;
+  string Reason = 3;
+  string OperationID = 5;
+  string OpUserID = 6;  //app manger or group manager
+  int32 GroupType = 7;
+}
+
+//@push group.kick.user
+message KickGroupMemberResp {
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+  repeated Id2Result Id2ResultList = 3;
+  string GroupID = 4;
+}
+
+//@send group.info
+message GetGroupsInfoReq{
+  string groupID = 1;
+  string OperationID = 2;
+  string OpUserID = 3; //No verification permission
+  int32 GroupType = 4;
+}
+
+//@push group.info
+message GetGroupsInfoResp{
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+  GroupInfo groupInfo = 3;
+  repeated GroupMemberFullInfo memberList = 4;
+}
+
+//@send group.member.info.set
+message SetGroupMemberInfoReq{
+  string groupID = 1;
+  string userID = 2;
+  string opUserID = 3;
+  string operationID = 4;
+  google.protobuf.StringValue nickname = 5;
+  google.protobuf.StringValue faceURL = 6;
+  google.protobuf.Int32Value roleLevel = 7;
+  google.protobuf.StringValue ex = 8;
+  int32 GroupType = 9;
+}
+
+
+//@push group.member.info.set
+message SetGroupMemberInfoResp{
+  CommonResp CommonResp = 1;
+}
+
+//@send group.recommend.bt group.recommend.clan
+message RecommendGroupsReq {
+  string opUserID = 1;
+  string operationID = 2;
+  int32 GroupType = 3;
+}
+
+//@push group.recommend.bt group.recommend.clan
+message RecommendGroupsResp {
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+  repeated GroupInfo GroupInfoList = 3;
+}
+
+//@send group.invite.users
+message InviteUserToGroupReq {
+  string OperationID = 1;
+  string GroupID = 2;
+  repeated string InvitedUserIDList = 3;
+  int32 GroupType = 4;
+}
+
+//@push group.invite.users
+message InviteUserToGroupResp {
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+}
+
+//@send group.invite.response
+message ResponseBeInvitedToGroupReq {
+  string OperationID = 1;
+  string GroupID = 2;
+  int32  GroupType = 3;
+  int32  handleResult = 4;
+  string fromUser = 5;
+}
+
+//@push group.invite.response
+message ResponseBeInvitedToGroupResp {
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+}
+
+//@send group.mute.switch group.invite.switch group.recommend.switch
+message GroupSwitchReq{
+  string opUserID = 1; //group  or app manager
+  string operationID = 2;
+  string groupID = 3;
+  int32 switch = 4;  // 0:close, 1:open
+  int32 groupType = 5;
+}
+
+//@push group.mute.switch group.invite.switch group.recommend.switch
+message GroupSwitchResp{
+  CommonResp commonResp = 1;
+}
+
+//@send group.role.add
+message GroupRoleAddReq {
+  string operationID = 1;
+  string groupID = 2;
+  RoleInfo roleInfo = 3;
+  int32 groupType = 4;
+}
+
+//@push group.role.add
+message GroupRoleAddResp {
+  string operationID = 1;
+  string groupID = 2;
+  CommonResp commonResp = 3;
+}
+
+//@send group.role.update
+message GroupRoleUpdateReq {
+  string operationID = 1;
+  string groupID = 2;
+  RoleInfo roleInfo = 3;
+  int32 GroupType = 4;
+}
+
+//@push group.role.update
+message GroupRoleUpdateResp {
+  string operationID = 1;
+  string groupID = 2;
+  CommonResp commonResp = 3;
+}
+
+//@send group.search
+message SearchGroupsReq {
+  string keyWord = 1;
+  int32 groupType = 2;
+}
+
+//@push group.search
+message SearchGroupsResp {
+  repeated GroupInfo groupInfoList = 1;
+  int32 groupType = 2;
+}
+
+// 群组模块相关结束 end---------------
+
+
+// 好友模块相关开始 start---------------
+message CommID{
+  string OpUserID = 1;
+  string OperationID = 2;
+  string ToUserID = 4;
+  string FromUserID = 5;
+}
+
+//@send friend.list
+message GetFriendListReq{
+  CommID CommID = 1;
+}
+
+//@push friend.list
+message GetFriendListResp{
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+  repeated FriendInfo FriendInfoList = 3;
+}
+
+//@send friend.add
+message AddFriendReq{
+  CommID CommID = 1;
+  string ReqMsg = 2;
+}
+
+//@push friend.add
+message AddFriendResp{
+  CommonResp CommonResp = 1;
+}
+
+//@send friend.delete
+message DeleteFriendReq{
+  CommID CommID = 1;
+}
+
+//@push friend.delete
+message DeleteFriendResp{
+  CommonResp CommonResp = 1;
+}
+
+//@send friend.apply.list
+message GetFriendApplyListReq{
+  CommID CommID = 1;
+}
+
+//@push friend.apply.list
+message GetFriendApplyListResp{
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+  repeated FriendRequest FriendRequestList = 3;
+}
+
+//@send friend.response
+message AddFriendResponseReq{
+  CommID CommID = 1;
+  int32  handleResult = 2;
+  string handleMsg = 3;
+}
+
+//@push friend.response
+message AddFriendResponseResp{
+  CommonResp CommonResp = 1;
+}
+
+//@send friend.response.all
+message AddFriendResponseAllReq{  // 一键同意or拒绝
+  int32  handleResult = 1;
+  string handleMsg = 2;
+}
+
+//@send friend.self.apply.list
+message GetSelfApplyListReq{
+  CommID CommID = 1;
+}
+
+//@push friend.self.apply.list
+message GetSelfApplyListResp{
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+  repeated FriendRequest FriendRequestList = 3;
+}
+
+message GetBlacklistReq{
+  CommID CommID = 1;
+}
+message GetBlacklistResp{
+  int32   ErrCode = 1;
+  string  ErrMsg = 2;
+  repeated UserInfo BlackUserInfoList = 3;
+}
+
+message AddBlacklistReq{
+  CommID CommID = 1;
+}
+message AddBlacklistResp{
+  CommonResp CommonResp = 1;
+}
+
+message RemoveBlacklistReq{
+  CommID CommID = 1;
+}
+message RemoveBlacklistResp{
+  CommonResp CommonResp = 1;
+}
+
+
+// 好友模块相关结束 end---------------
+
+// user模块相关start start---------------
+//@send user.info user.recommend
+message GetUsersReq {
+  string operationID = 1;
+  RequestPagination pagination = 2;
+  string userName = 3;
+  string userID = 4;
+  string content = 5;
+}
+
+message CmsUser {
+  UserInfo user = 1;
+  bool isBlock = 2;
+}
+
+//@push user.info user.recommend
+message GetUsersResp{
+  CommonResp  commonResp = 1;
+  repeated CmsUser userList = 2;
+  ResponsePagination Pagination = 3;
+  int32 totalNums = 4;
+}
+
+// user模块相关结束 end---------------
+
+// 会话模块相关开始 start---------------
+//@send conv.list
+message GetAllConversationsReq{
+  string OwnerUserID = 1;
+  string OperationID = 2;
+}
+
+//@push conv.list
+message GetAllConversationsResp{
+  CommonResp  commonResp = 1;
+  repeated Conversation Conversations = 2;
+}
+
+message Conversation{
+  string ownerUserID = 1;
+  string conversationID = 2;
+  int32 recvMsgOpt = 3;
+  int32 conversationType = 4;
+  string userID = 5;
+  string groupID = 6;
+  int32 unreadCount = 7;
+  int64 draftTextTime = 8;
+  bool isPinned = 9;
+  string attachedInfo = 10;
+  bool isPrivateChat = 11;
+  int32 groupAtType = 12;
+  bool isNotInGroup = 13;
+  string ex = 14;
+  int64  updateUnreadCountTime = 15;
+  int32 burnDuration = 16;
+}
+
+//@send conv.field.update
+message ModifyConversationFieldReq{
+  server_api_params.Conversation conversation = 1;
+  int32 fieldType = 2;
+  repeated string userIDList = 3;
+  string operationID = 4;
+}
+
+//@push conv.field.update
+message ModifyConversationFieldResp{
+  CommonResp  commonResp = 1;
+}
+
+//@send conv.set.batch
+message BatchSetConversationsReq{
+  repeated server_api_params.Conversation Conversations = 1;
+  string OwnerUserID = 2;
+  int32 notificationType = 3;
+  string OperationID = 4;
+}
+
+//@push conv.set.batch
+message BatchSetConversationsResp{
+  CommonResp  commonResp = 1;
+  repeated string Success = 2;
+  repeated string Failed = 3;
+}
+
+// 删除(批量)会话
+//@send conv.delete
+message DelConversationReq{
+  string ownerUserID = 1;
+  string conversationID = 2;
+}
+
+// 删除resp
+//@push conv.delete
+message DelConversationResp{
+  CommonResp  commonResp = 1;
+}
+
+// 会话模块相关结束 end---------------
+
+
+
+//////////////////////////  消息推送 start  //////////////////////////
+// 群组消息推送start-----------------
+
+message GroupCreateMsg {
+  GroupInfo group = 1;
+  GroupMemberFullInfo creator = 2;  // 建群者
+}
+
+message MemberEnterMsg {
+  string groupID = 1;
+  GroupMemberFullInfo entrantUser = 2;
+}
+
+message MemberQuitMsg {
+  string groupID = 1;
+  GroupMemberFullInfo quitUser = 2;
+}
+
+message MemberKickedMsg {
+  string groupID = 1;
+  GroupMemberFullInfo opUser = 2;  // 踢人的操作者
+  repeated GroupMemberFullInfo kickedUserList = 3; // 被踢的人
+}
+// 群组消息推送end-------------------
+
+
+
+// 头像
+//@push game.user.avatar.add
+message AvatarAddSync{
+  repeated string avatarList = 1; // 增量头像id
+}
+
+//@send user.avatar.change
+message AvatarChangeReq{
+  string avatarId = 1; // 修改头像id
+}
+
+//@send user.nickname.change
+message NicknameChangeReq{
+  string nickname = 1; // 修改用户昵称
+}
+
+//@send user.setting.change
+//@push user.setting.change
+message SettingChange{
+  map<int32, int32> setting = 1; // 用户个人设置 类型 =》 状态   类型1代表是否开启切磋，0关 1开
+}
+
+//@push user.setting.sync
+message SettingSync{
+  map<int32, int32> setting = 1; // 用户个人设置 类型 =》 状态
+}
+
+
+//////////////////////////  消息推送 end //////////////////////////
+
+
+//暂时客户端自己构造使用
+message TranslateMsg {
+  string clientMsgId = 1;
+  string text = 2;
+  string targetLang = 3;
+}
+
+message PullSeqFinishResp {
+  TopicType topic = 1;
+}

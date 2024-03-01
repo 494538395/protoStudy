@@ -1,0 +1,27 @@
+syntax = "proto3";
+option go_package = "../pbfile";
+
+// s-c交互消息报
+message Packet {
+  string event = 1; // 事件名
+  bytes data = 2; // 消息体
+  uint64 id = 3; // 消息id
+}
+
+
+
+message Msg {
+  string seq = 1; // 消息唯一id
+  MsgType type = 2; // 消息类型
+  string event = 3; // 事件
+  bytes data = 4;    // 内部消息bytes
+}
+
+
+enum MsgType //枚举 消息类型
+{
+  NONE = 0;    // proto3版本中，首成员必须为0，成员不应有相同的值
+  EVENT = 1;   // 事件处理
+  PUSH = 2;    // 推送
+  RAWEVENT = 3;    // 事件处理，Req/Resp 格式为二进制串
+}

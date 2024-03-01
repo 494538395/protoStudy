@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	pb "protoStudy/89t/websocket/proto"
+	pb "protoStudy/89t/websocket/pbfile"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/jhump/protoreflect/desc"

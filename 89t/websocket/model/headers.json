@@ -1,0 +1,22 @@
+{
+  "headers": [
+    {
+      "key": "name",
+      "value": "jerry",
+      "default": false,
+      "checked": true
+    },
+    {
+      "key": "Connection",
+      "value": "Upgrade",
+      "default": true,
+      "checked": true
+    },
+    {
+      "key": "Upgrade",
+      "value": "websocket",
+      "default": true,
+      "checked": true
+    }
+  ]
+}

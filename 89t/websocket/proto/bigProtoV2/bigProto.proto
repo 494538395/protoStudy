@@ -1,0 +1,186 @@
+syntax = "proto3";
+option go_package = "../pbfile";
+
+//@send test.big.proto.v1
+//@push test.big.proto.v1
+message Person01{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v2
+//@push test.big.proto.v2
+message Person02{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v3
+//@push test.big.proto.v3
+message Person03{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v4
+//@push test.big.proto.v4
+message Person04{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v5
+//@push test.big.proto.v5
+message Person05{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v6
+//@push test.big.proto.v6
+message Person06{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v7
+//@push test.big.proto.v7
+message Person07{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v8
+//@push test.big.proto.v8
+message Person08{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v9
+//@push test.big.proto.v9
+message Person09{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v10
+//@push test.big.proto.v10
+message Person10{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v11
+//@push test.big.proto.v11
+message Person11{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v12
+//@push test.big.proto.v12
+message Person12{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v13
+//@push test.big.proto.v13
+message Person13{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v14
+//@push test.big.proto.v14
+message Person14{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+
+//@send test.big.proto.v15
+//@push test.big.proto.v15
+message Person15{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+
+//@send test.big.proto.v16
+//@push test.big.proto.v16
+message Person16{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v17
+//@push test.big.proto.v17
+message Person17{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+
+//@send test.big.proto.v18
+//@push test.big.proto.v18
+message Person18{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+
+//@send test.big.proto.v19
+//@push test.big.proto.v19
+message Person19{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v20
+//@push test.big.proto.v20
+message Person20{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+
+//@send test.big.proto.v21
+//@push test.big.proto.v21
+message Person21{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+
+//@send test.big.proto.v22
+//@push test.big.proto.v22
+message Person22{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+//@send test.big.proto.v23
+//@push test.big.proto.v23
+message Person23{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+
+//@send test.big.proto.v24
+//@push test.big.proto.v24
+message Person24{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+
+//@send test.big.proto.v25
+//@push test.big.proto.v25
+message Person25{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+

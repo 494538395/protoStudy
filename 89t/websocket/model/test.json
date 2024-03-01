@@ -1,6 +1,6 @@
 {
-  "reqProto": "Req",
-  "respProto": "Resp",
+  "mainReq": "Packet",
+  "mainRes": "Packet",
   "req": [
     {
       "event": "recruit.query.pool",

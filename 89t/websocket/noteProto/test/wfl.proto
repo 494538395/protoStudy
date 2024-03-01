@@ -1,7 +1,7 @@
 syntax = "proto3";
-option go_package = "./";
+option go_package = "../pbfile";
 
-message Req {// 第一层
+message Req {
   int32    identifier = 1;
   string   operation = 2;
   string   msgId = 3;
@@ -11,24 +11,6 @@ message Req {// 第一层
     GetMsgMaxAndMinSeqReq maxAndMinSeqReq = 6;
   }
 }
-
-message SendMsgReq {
-  string desc = 1;
-  SendMsgReq2 info = 2;
-}
-
-message SendMsgReq2 {
-  string event = 1;
-  bytes data = 2;
-  TopicType topic = 3;
-}
-
-
-//@send recruit.query.pool
-message RecruitQueryPoolReq {
-  int32 id = 1; // 招募卡池id
-}
-
 
 message Resp {
   int32   identifier = 1;
@@ -41,6 +23,18 @@ message Resp {
     PullSeqFinishResp pullSeqFinishResp = 9;
   }
 }
+
+message SendMsgReq {
+  string event = 1;
+  bytes data = 2;
+  TopicType topic = 3;
+}
+
+//@send recruit.query.pool
+message RecruitQueryPoolReq {
+  int32 id = 1; // 招募卡池id
+}
+
 
 message GeneralMsgData {
   string event = 1;

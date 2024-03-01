@@ -1,10 +1,10 @@
 {
-  "reqProto": "Req",
-  "respProto": "Resp",
+  "mainReq": "Packet",
+  "mainResp": "Packet",
   "req": [
     {
-      "event": "recruit.query.pool",
-      "data": "RecruitQueryPoolReq"
+      "event": "hamster.change.direction",
+      "data": "HamsterChangeDirection"
     },
     {
       "event": "recruit.edit.pool",
@@ -13,8 +13,8 @@
   ],
   "resp": [
     {
-      "event": "recruit.query.pool",
-      "data": "RecruitQueryPoolReq"
+      "event": "hamster.change.direction",
+      "data": "HamsterChangeDirection"
     },
     {
       "event": "recruit.edit.pool",

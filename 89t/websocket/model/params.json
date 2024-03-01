@@ -1,0 +1,10 @@
+{
+  "params": [
+    {
+      "key": "name",
+      "value": "jerry",
+      "default": false,
+      "checked": true
+    }
+  ]
+}

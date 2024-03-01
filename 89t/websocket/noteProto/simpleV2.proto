@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+//@send event07
+message Demo01 {
+  int32 topic = 1;
+}
+
+
+//@send event08
+message Demo02 {
+  int32 topic = 1;
+}
+
+//@push event09
+message Demo03 {
+  int32 topic = 1;
+}
+
+message Demo04 {
+  int32 topic = 1;
+}
+
+
+

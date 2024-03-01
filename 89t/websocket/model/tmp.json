@@ -1,0 +1,36 @@
+{
+  "req": [
+    {
+      "event": "launch.topic.confirm",
+      "data": "LaunchTopicConfirmReq"
+    },
+    {
+      "event": "launch.config.confirm",
+      "data": "LaunchConfigConfirmReq"
+    },
+    {
+      "event": "launch.event.confirm",
+      "data": "LaunchConfigConfirmReq"
+    },
+    {
+      "event": "UserDisconnect",
+      "data": "UserDisconnectResp"
+    },
+    {
+      "event": "barrack.item.clean",
+      "data": "BarrackInfo"
+    }
+  ],
+  "resp": [
+    {
+      "event": "launch.progress.change",
+      "data": "LaunchProgressResp"
+    },
+    {
+      "event": "game.barrack.item.change",
+      "data": "BarrackInfo"
+    }
+  ]
+}
+
+

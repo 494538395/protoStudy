@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+//@send event01 event02
+message LaunchTopicConfirmReq {
+  int32 topic = 1;
+}
+
+//@send event03
+message LaunchConfigConfirmReq {
+  repeated string modelName = 1;
+}
+
+//@push event04
+//@send event05 event06
+message PullMsg {
+  repeated string modelName = 1;
+}
+
+message SendMsg {
+  repeated string modelName = 1;
+}

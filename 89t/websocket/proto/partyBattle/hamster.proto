@@ -1,0 +1,78 @@
+syntax = "proto3";
+option go_package = "../pbfile";
+//import "common/common.proto";
+
+// 此协议用作同步仓鼠移动角度
+//@send hamster.change.direction
+//@push hamster.change.direction
+message HamsterChangeDirection{
+  string userID = 1;
+  float newDirection = 2; // 新的移动角度
+}
+
+// 此协议用作同步奖励
+//@push hamster.get.reward
+message HamsterGetReward{
+  string userID = 1;
+//  CommonReward reward = 2;
+//  CommonTopicType topicType = 3;
+}
+
+
+// 此协议用作描述炸弹信息
+//@send hamster.bomb.info
+message HamsterBomb{
+  int32 ID = 1;
+  float X = 2;
+  float Y = 3;
+  int32 direction = 4;
+  int32 speed = 5 ;
+}
+
+// 此协议用作同步玩家炸晕状态
+message HamsterBoomDizzy{
+  string userID = 1;// 被炸弹炸晕的用户 ID
+}
+
+// 此协议用作同步玩家从炸晕恢复清醒状态
+message HamsterBoomRecover{
+  string userID = 1;
+}
+
+message HamsterBombInfos{
+  repeated HamsterBomb bombs = 1;
+}
+
+// 此协议用作广播初始化数据
+message HamsterGameStart{
+  repeated HamsterBomb bombs = 1; // 炸弹信息
+  HamsterNut nut = 2; // 仓鼠信息
+  int32 gameSecond = 3;// 游戏时长（秒）
+}
+
+// 此协议用作描述瓜子坐标
+message HamsterNut{
+  float X = 1;
+  float Y = 2;
+}
+
+// 此协议用作同步玩家吃瓜子状态
+message HamsterEatNut {
+  string userID = 1;
+}
+
+// 此协议用作广播游戏结束信息
+//@push hamster.game.end
+message HamsterGameEnd {
+  string winner = 1; // 游戏获胜者
+  repeated HamsterUserRank rank = 2; // 游戏终局排行榜
+}
+
+// 此协议用作描述玩家积分信息
+//@push hamster.user.rank
+message HamsterUserRank {
+  string userID = 1; // 用户
+  int32 score = 2; // 用户分数
+  int32 rank = 3; // 用户排名
+}
+

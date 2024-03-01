@@ -1,24 +1,13 @@
-
-
-
-
-
-
 {
   "identifier": 1001,
   "operation": "admin",
   "msgId": "100",
   "sendMsgReq": {
-    "desc": "hello",
-    "sendMsgReq2": {
-      "event": "recruit.query.pool",
-      "topic": "PUSH",
-      "data": {
-        "id": 100
-      }
+    "event": "recruit.query.pool",
+    "topic": "PUSH",
+    "data": {
+      "id": 100
     }
   }
 }
-
-
 

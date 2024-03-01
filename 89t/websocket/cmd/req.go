@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	pb "protoStudy/89t/websocket/proto"
+	pb "protoStudy/89t/websocket/pbfile"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/jhump/protoreflect/desc"
@@ -52,7 +52,8 @@ func makeServerReq(jsonData string, fds []*desc.FileDescriptor) []byte {
 			if err != nil {
 				panic(err)
 			}
-			fmt.Println("hamsterDirection-->", hamsterDirection)
+			fmt.Println("hamsterDirection.UserID-->", hamsterDirection.UserID)
+			fmt.Println("hamsterDirection.UserID-->", hamsterDirection.NewDirection)
 		}
 	}
 
@@ -66,24 +67,22 @@ func makeServerReq(jsonData string, fds []*desc.FileDescriptor) []byte {
 
 		fmt.Println(t)
 
-		fmt.Println("t.MsgId-->", t.MsgId)
-		fmt.Println("t.Identifier-->", t.Identifier)
-		fmt.Println("t.Operation-->", t.Operation)
+		fmt.Println("Req.MsgId-->", t.MsgId)
+		fmt.Println("Req.Identifier-->", t.Identifier)
+		fmt.Println("Req.Operation-->", t.Operation)
 
 		sendMsg := t.GetSendMsgReq()
+		fmt.Println("SendMsgReq.Desc-->", sendMsg.Event)
+		fmt.Println("SendMsgReq.Info.Topic-->", sendMsg.Topic)
 
-		fmt.Println("sendMsg.Desc-->", sendMsg.Desc)
-		fmt.Println("sendMsg.Info.Topic-->", sendMsg.Info.Topic)
-		fmt.Println("sendMsg.Info.Event-->", sendMsg.Info.Event)
-
-		if sendMsg.Info.Event == "recruit.query.pool" {
+		if sendMsg.Event == "recruit.query.pool" {
 
 			var rqp pb.RecruitQueryPoolReq
-			err = proto.Unmarshal(sendMsg.Info.Data, &rqp)
+			err = proto.Unmarshal(sendMsg.Data, &rqp)
 			if err != nil {
 				panic(err)
 			}
-			fmt.Println(rqp)
+			fmt.Println("RecruitQueryPoolReq.id-->", rqp.Id)
 		}
 
 		//fmt.Println("sendMsg.Data-->", sendMsg.Data)

@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+//@push test.jerry.v1 test.jerry.v2
+// 你好，这是注释01
+// 你好，这是注释02
+// 你好，这是注释03
+// 你好，这是注释04
+//@send test.jerry.v3
+message Person01{// 一键处理全部好友审批结果的通知
+  repeated int32 userIdList = 1;  // 本次处理的id列表
+  int32 handleResult = 2;
+}
+
+//@push test.jerry.v4
+//@send test.jerry.v5
+// 你好，这是注释01
+// 你好，这是注释02
+// 你好，这是注释03
+// 你好，这是注释04
+message Person02{// 一键处理全部好友审批结果的通知
+  repeated int32 userIdList = 1;  // 本次处理的id列表
+  int32 handleResult = 2;
+}
+
+// 你好，这是注释01
+// 你好，这是注释02
+// 你好，这是注释03
+// 你好，这是注释04
+//@push test.jerry.v5
+//@send test.jerry.v6
+message Person03{// 一键处理全部好友审批结果的通知
+  repeated int32 userIdList = 1;  // 本次处理的id列表
+  int32 handleResult = 2;
+}
+
+
+////@send test.jerry.v1 test.jerry.v1111
+//message Person01 {  // 一键处理全部好友审批结果的通知
+//  repeated int32 userIdList = 1;  // 本次处理的id列表
+//  int32 handleResult = 2;
+//}
+//
+//
+////@push test.jerry.v2
+//// 你好，这是注释01
+//// 你好，这是注释02
+//// 你好，这是注释03
+//// 你好，这是注释04
+//message Person02{  // 一键处理全部好友审批结果的通知
+//  repeated int32 userIdList = 1;  // 本次处理的id列表
+//  int32 handleResult = 2;
+//}
+//
+//
+////@send test.jerry.v3
+//message Person03{  // 一键处理全部好友审批结果的通知
+//  repeated int32 userIdList = 1;  // 本次处理的id列表
+//  int32 handleResult = 2;
+//}
+//
+////@push test.jerry.v4 test.jerry.v40
+//message Person04{  // 一键处理全部好友审批结果的通知
+//  repeated int32 userIdList = 1;  // 本次处理的id列表
+//  int32 handleResult = 2;
+//}
+//
+////@push test.jerry.v5
+////@send test.jerry.v6
+//// 你好，这是注释01
+//// 你好，这是注释02
+//// 你好，这是注释03
+//// 你好，这是注释04
+//message Person05{  // 一键处理全部好友审批结果的通知
+//  repeated int32 userIdList = 1;  // 本次处理的id列表
+//  int32 handleResult = 2;
+//}
+//
+////@push test.jerry.v7
+//// 你好，这是注释01
+//// 你好，这是注释02
+//// 你好，这是注释03
+//// 你好，这是注释04
+////@send test.jerry.v8
+//message Person06{  // 一键处理全部好友审批结果的通知
+//  repeated int32 userIdList = 1;  // 本次处理的id列表
+//  int32 handleResult = 2;
+//}
+//
+//message SendMsg{  // 一键处理全部好友审批结果的通知
+//  repeated int32 userIdList = 1;  // 本次处理的id列表
+//  int32 handleResult = 2;
+//}

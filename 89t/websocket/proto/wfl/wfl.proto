@@ -1,0 +1,111 @@
+syntax = "proto3";
+option go_package = "../pbfile";
+
+message Req {
+  int32    identifier = 1;
+  string   operation = 2;
+  string   msgId = 3;
+  oneof data {
+    SendMsgReq sendMsgReq = 4;
+    PullMsgBySeqListReq pullMsgBySeqListReq = 5;
+    GetMsgMaxAndMinSeqReq maxAndMinSeqReq = 6;
+  }
+}
+
+message Resp {
+  int32   identifier = 1;
+  string  operation = 2;
+  string  msgId = 3;
+  oneof data {
+    GeneralMsgData pushData = 6;
+    PullMsgBySeqListResp pullMsgBySeqListResp = 7;
+    GetMsgMaxAndMinSeqResp maxAndMinSeqResp = 8;
+    PullSeqFinishResp pullSeqFinishResp = 9;
+  }
+}
+
+message SendMsgReq {
+  string event = 1;
+  bytes data = 2;
+  TopicType topic = 3;
+}
+
+//@send recruit.query.pool
+message RecruitQueryPoolReq {
+  int32 id = 1; // 招募卡池id
+}
+
+
+message GeneralMsgData {
+  string event = 1;
+  TopicType topic = 2;
+  MsgContentType contentType = 3;
+  uint32 seqId = 4;
+  bytes data = 5;
+  int32   errCode = 6;
+  string  errMsg = 7;
+}
+
+//@push recruit.query.pool
+message RecruitQueryPoolResp {
+  int32 id = 1; // 招募卡池id
+  repeated int32 cardIds = 2; // 卡牌id列表 格式1010130
+  repeated int32 luckCardIds = 3; // 卡牌id列表 格式1010130
+}
+
+
+message PullMsgBySeqListReq{
+
+}
+
+message GetMsgMaxAndMinSeqReq{
+
+}
+
+message PullMsgBySeqListResp{
+  string  name = 1;
+  int32 age = 2;
+  oneof data{
+    PersonA pea = 3;
+    PersonB peb = 4;
+    PersonC pec = 5;
+  }
+}
+
+message PersonA{
+  string  name = 1;
+  string address = 2;
+}
+
+message PersonB{
+  string  name = 1;
+  string address = 2;
+}
+
+message PersonC{
+  string  name = 1;
+  string address = 2;
+}
+
+
+message GetMsgMaxAndMinSeqResp{
+
+}
+
+message PullSeqFinishResp{
+
+}
+
+enum TopicType //枚举 消息类型
+{
+  NONE = 0;    // proto3版本中，首成员必须为0，成员不应有相同的值
+  EVENT = 1;   // 事件处理
+  PUSH = 2;    // 推送
+}
+
+
+enum MsgContentType
+{
+  FIRST = 0;
+  THIRD = 1;
+}

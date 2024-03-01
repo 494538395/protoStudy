@@ -1,10 +1,18 @@
 syntax = "proto3";
-option go_package = "./";
+option go_package = "../pbfile";
+import "common/common.proto";
+
 
 // 此协议用作同步仓鼠移动角度
 message HamsterChangeDirection{
   string userID = 1;
   float newDirection = 2; // 新的移动角度
+}
+
+message HamsterGetReward{
+  string userID = 1;
+  CommonReward reward = 2;
+  CommonTopicType topicType = 3;
 }
 
 // 此协议用作同步玩家炸晕状态
@@ -25,7 +33,7 @@ message HamsterBombInfos{
 message HamsterGameStart{
   repeated HamsterBomb bombs = 1; // 炸弹信息
   HamsterNut nut = 2; // 仓鼠信息
-  int32 gameSecond =3;// 游戏时长（秒）
+  int32 gameSecond = 3;// 游戏时长（秒）
 }
 
 // 此协议用作描述瓜子坐标

@@ -1,6 +1,6 @@
 {
-  "reqProto": "Req",
-  "respProto": "Resp",
+  "mainReq": "Req",
+  "mainResp": "Resp",
   "req": [
     {
       "event": "recruit.query.pool",
@@ -14,7 +14,7 @@
   "resp": [
     {
       "event": "recruit.query.pool",
-      "data": "RecruitQueryPoolReq"
+      "data": "RecruitQueryPoolResp"
     },
     {
       "event": "recruit.edit.pool",
@@ -22,5 +22,3 @@
     }
   ]
 }
-
-

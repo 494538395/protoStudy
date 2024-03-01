@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+
+
+//@push test.jerry.v2
+message FriendAllApplication{  // 一键处理全部好友审批结果的通知
+  repeated int32 userIdList = 1;  // 本次处理的id列表
+  int32 handleResult = 2;
+}
+
+//@push test.jerry.v3
+message FriendAllApplicationResult{  // 一键处理全部好友审批结果的通知
+  repeated int32 userIdList = 1;  // 本次处理的id列表
+  int32 handleResult = 2;
+}

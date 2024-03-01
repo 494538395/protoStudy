@@ -1,0 +1,19 @@
+syntax = "proto3";
+option go_package = "../pbfile";
+import "realCommon/realCommon.proto";
+
+
+message CommonReward{
+  string itemName = 1;
+  int32 itemCount = 2;
+  RealCommonReward rlward = 3;
+}
+
+
+enum CommonTopicType //枚举 消息类型
+{
+  NONE = 0;    // proto3版本中，首成员必须为0，成员不应有相同的值
+  EVENT = 1;   // 事件处理
+  PUSH = 2;    // 推送
+}
+
